@@ -114,7 +114,7 @@
 
     const bind_data = async  () => {
         store.itensCadastro = []
-       var result = await axios.get(store.baseApiHTTPS+'/vendas') 
+       var result = await axios.get(store.baseApiHTTPS+'/mercadovendas') 
       
     
         //table 2

@@ -1,8 +1,9 @@
 import { createStore } from 'vuex';
 import i18n from '../i18n';
-
+ 
 export default new createStore({
     state: {
+        login : false,
         layout: 'app',
         is_show_sidebar: true,
         is_show_search: false,
@@ -30,6 +31,9 @@ export default new createStore({
         ],
     },
     mutations: {
+        setLogin(state, status) {
+            state.setLogin = status;
+        },
         setLayout(state, payload) {
             state.layout = payload;
         },

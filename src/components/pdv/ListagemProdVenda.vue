@@ -60,7 +60,7 @@ const store = indexStore();
 const produtos = [ ]
  
 const getProdutos = (async () => { 
-  const result = await axios.get('http://localhost:4040/produtos') 
+  const result = await axios.get('https://json-replace-oracle-production.up.railway.app/mercadoprodutos') 
     produtos.push(result.data)
   })
  
@@ -100,10 +100,6 @@ function somaCaixa() {
           }
           return totalProd
 }
-
-
- 
-
  
 
  const addVenda = async () => {
@@ -111,7 +107,7 @@ function somaCaixa() {
  
    
 var data = {   
-      COD_CLIENTE: 1,
+      COD_CLIENTE: 999,
       COD_ENDERECO: 1,    
       VALOR: somaCaixa(),
       TROCO: store.vendaCaixa.valorTroco, 
@@ -124,7 +120,7 @@ console.log(data)
 var config = {
   method: 'post',
 maxBodyLength: Infinity,
-  url: 'http://localhost:4040/vendas',
+  url: 'https://json-replace-oracle-production.up.railway.app/mercadovendas',
   headers: { 
     'Content-Type': 'application/json'
   },
@@ -134,8 +130,8 @@ maxBodyLength: Infinity,
 axios(config)
 .then(function (response) {
   console.log(JSON.stringify(response.data));
-  store.CaixaProdutos = []
-window.location.href = window.location.href
+  //store.CaixaProdutos = []
+  //window.location.href = window.location.href
 })
 .catch(function (error) {
   console.log(error);

@@ -24,6 +24,8 @@
         </router-link> 
     </div>
    
+    
+
     <div  
     style="
            background-attachment: fixed;                               
@@ -33,12 +35,11 @@
     v-bind:style="{ 'background-image': 'url(' + store.imagemAmbiente + ')' }"
     > 
 
- 
-     
+  
     <div style="padding: 15px; width: 300px; position: relative;">
     
         <h2 style="color: black; font-size: 27px; margin-left: 5px; font-weight: bold;">Resumo do Pedido</h2> 
-
+    
         <input style="padding: 5px; 
                 font-size: 18px;
                 background-color: #000000DD;
@@ -297,6 +298,7 @@
 <script setup>
     
     import {indexStore} from '../../store/IndexStore' 
+    import {index} from '../../store/Index' 
     import axios from 'axios'  
     import icons from '../../views/font_icons.vue'
     import { onMounted, ref } from 'vue';
@@ -315,7 +317,7 @@
       console.log('redirect')
       router.push("/itens") 
     }
- 
+    const store1 = indexStore(); 
    
     const store = indexStore(); 
     

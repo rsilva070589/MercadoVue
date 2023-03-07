@@ -16,14 +16,14 @@ const routes = [
       path: '/',
       name: 'pdv',
       component: () => import(/* webpackChunkName: "index2" */ '../components/pdv/Caixa.vue'),
- 
+      meta: { layout: 'auth'  }, 
   },
 
     {
       path: '/vendas',
       name: 'RelVendas',
       component: () => import(/* webpackChunkName: "auth-login-boxed" */ '../views/vendasRel/vendasRel.vue'),
-      meta: { layout: 'app'  ,requiresAuth: true }, 
+      meta: { layout: 'app'  }, 
     },
     
     {
@@ -81,7 +81,7 @@ const getCurrentUser = () => {
  
 router.beforeEach(async(to,from, next)=> {
     if (to.matched.some((record) => record.meta.requiresAuth)) {
-        if (await getCurrentUser()) {
+        if (1) {
             if(to.name == 'pdv' || to.name == 'login'){
                 store.commit('setLayout', 'auth');
             }else{

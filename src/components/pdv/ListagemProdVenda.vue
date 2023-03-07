@@ -130,8 +130,8 @@ maxBodyLength: Infinity,
 axios(config)
 .then(function (response) {
   console.log(JSON.stringify(response.data));
-  //store.CaixaProdutos = []
-  //window.location.href = window.location.href
+  store.CaixaProdutos = []
+  window.location.href = window.location.href
 })
 .catch(function (error) {
   console.log(error);

@@ -67,7 +67,7 @@
                                     <div>
                                         <select class="form-control"   v-model="store.cadastroProduto.SITUACAO">
                                             <option disabled value="">Selecione</option>
-                                            <option>ATIVO</option>
+                                            <option>ATIVADO</option>
                                             <option>DESATIVADO</option>                                            
                                         </select>
                                     </div>

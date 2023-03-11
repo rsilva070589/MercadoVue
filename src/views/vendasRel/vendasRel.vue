@@ -1,12 +1,13 @@
 <template>
     <div class="layout-px-spacing" style="margin-top: -100px;">
-        <h2 class="text-2xl font-medium mx-2" data-testid="statements-title-txt">Vendas</h2>
+        <h2 class="text-2xl font-medium mx-2" data-testid="statements-title-txt">Ticket Médio de Vendas</h2>
         <div> 
 </div>
  
         
 
-         <div  style="display: flex; 
+         <div  style="display: flex;
+        flex-wrap: wrap; 
                         margin: 15px 0px 15px 0px;
                     ">
 

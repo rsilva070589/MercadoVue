@@ -4,16 +4,43 @@
         <div> 
 </div>
  
+        
+
          <div  style="display: flex; 
                         margin: 15px 0px 15px 0px;
                     ">
+
+                    <div class="card" style="padding: 10px; width: 200px;height: 120px;border-radius: 10px;
+                                    align-items: center; margin: 0px 20px 15px 0px;">
+            <span style="font-size: 30px; color: black;">
+                Total Mês
+            </span> 
+            <div style="font-size: 30px; color: forestgreen">
+                R$ {{ totalMes()}}
+            </div>
+         </div>
+
          <div class="card" style="padding: 10px;  width: 200px; height: 120px; 
                                  border-radius: 10px; align-items: center;
                                  margin: 0px 20px 15px 0px;
                                  background-color: ;
                                  ">
             <span style="font-size: 30px; color: black; ">
-                Total diário
+                Lucro Mês
+            </span> 
+            <div style="font-size: 30px; color: forestgreen">
+                R$ {{ lucroMes()}}
+            </div>
+            
+         </div> 
+
+         <div class="card" style="padding: 10px;  width: 200px; height: 120px; 
+                                 border-radius: 10px; align-items: center;
+                                 margin: 0px 20px 15px 0px;
+                                 background-color: ;
+                                 ">
+            <span style="font-size: 30px; color: black; ">
+                Total Diário
             </span> 
             <div style="font-size: 30px; color: forestgreen">
                 R$ {{ vendasHoje()}}
@@ -27,7 +54,7 @@
                                 
                                 ">
             <span style="font-size: 30px; color: black;">
-                Lucro diário
+                Lucro Diário
             </span> 
              
             <div style="font-size: 30px; color: forestgreen">
@@ -35,15 +62,7 @@
             </div>
            
          </div>
-         <div class="card" style="padding: 10px; width: 200px;height: 120px;border-radius: 10px;
-                                    align-items: center; margin: 0px 20px 15px 0px;">
-            <span style="font-size: 30px; color: black;">
-                Total Mês
-            </span> 
-            <div style="font-size: 30px; color: forestgreen">
-                R$ {{ totalMes()}}
-            </div>
-         </div>
+       
          
          </div>
         
@@ -183,6 +202,15 @@
         }  
         return formataDinheiro(sum)
       }
+
+      function lucroMes(dtfilter) { 
+        var arr =  store.itensRelVendas.filter(f => f.MES == dataAtualMes(new Date())) 
+        var sum = 0; 
+        for(var i =0;i<arr.length;i++){ 
+          sum+=arr[i].LUCRO; 
+        }  
+        return formataDinheiro(sum)
+      }
    
      
     
@@ -236,3 +264,6 @@
 
 
 </script>
+
+<style>
+</style>

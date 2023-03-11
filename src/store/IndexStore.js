@@ -9,6 +9,7 @@ export const indexStore = defineStore("rotas", () =>{
     const recursos = []
 
    const baseApiHTTPS  = 'https://json-replace-oracle-production.up.railway.app'
+   
    //const baseApiHTTPS  = 'http://localhost:4040'
 
     const dadosItens = []
@@ -78,6 +79,18 @@ export const indexStore = defineStore("rotas", () =>{
             itensPedido: null,
             valorPago: null,
         }
+
+       const  itensRelVendas = [ {
+        ID: 0,
+        DATA: null,
+        COD_PRODUTO:null,
+        NOME:null,
+        QTDE:null,
+        VALOR : null,
+        CUSTO : null,
+        LUCRO : null,
+        PERC_LUCRO : null
+       } ]
     
     return {
         rotas,        
@@ -99,7 +112,8 @@ export const indexStore = defineStore("rotas", () =>{
         CaixaProdutos,
         recursos,
         formataDinheiro,
-        vendaCaixa
+        vendaCaixa,
+        itensRelVendas
     }
 });
 

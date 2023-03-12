@@ -30,7 +30,8 @@
                                             <option>Mercearia</option>
                                             <option>Limpeza</option>     
                                             <option>Bebidas</option>  
-                                            <option>Diversos</option>                                         
+                                            <option>Diversos</option>   
+                                            <option>Cigarros</option>                                        
                                         </select>
                                     </div>
                                 </div>
@@ -91,7 +92,7 @@
                         
 
                             <button @click="confirmar(store.cadastroProduto.ID)" type="" class="btn btn-primary mt-3">CONFIRMAR</button>
-                            <button @click="store.editando = false " type="" class="btn btn-danger mt-3">CANCELAR</button>
+                            <button style="margin-left: 10px;" @click="store.editando = false " type="" class="btn btn-danger mt-3">CANCELAR</button>
                       
                         </div>
                     </div>

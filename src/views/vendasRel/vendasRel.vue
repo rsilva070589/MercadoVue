@@ -41,7 +41,7 @@
                                  background-color: ;
                                  ">
             <span style="font-size: 30px; color: black; ">
-                Total Diário
+                Total do Dia
             </span> 
             <div style="font-size: 30px; color: forestgreen">
                 R$ {{ vendasHoje()}}
@@ -55,7 +55,7 @@
                                 
                                 ">
             <span style="font-size: 30px; color: black;">
-                Lucro Diário
+                Lucro do Dia
             </span> 
              
             <div style="font-size: 30px; color: forestgreen">

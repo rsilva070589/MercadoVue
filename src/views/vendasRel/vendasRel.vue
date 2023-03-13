@@ -4,9 +4,10 @@
         <div> 
 </div>
  
-        
+<Progress v-if="store.recursos.progress" />
 
-         <div  style="display: flex;
+<div v-if="!store.recursos.progress">
+    <div  style="display: flex;
         flex-wrap: wrap; 
                         margin: 15px 0px 15px 0px;
                     ">
@@ -128,10 +129,13 @@
                 </div>
             </div>
         </div>
+</div>
+       
     </div>
 </template>
 
 <script setup>
+    import Progress from '@/components/Progress.vue';
     import {indexStore} from '../../store/IndexStore' 
     import { onMounted, ref } from 'vue';
     import axios from 'axios'
@@ -140,6 +144,8 @@
     const store = indexStore(); 
     const code_arr = ref([]);
     //table 1
+
+    store.recursos.progress = true
 
     function dataAtualFormatada(dataFormat){
     var data = dataFormat,
@@ -253,6 +259,7 @@
         //table 2
         console.log(result.data)
         store.itensRelVendas =  result.data
+        store.recursos.progress = false
 
     }
     //table 2

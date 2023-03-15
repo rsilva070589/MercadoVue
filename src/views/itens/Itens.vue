@@ -85,6 +85,12 @@
                                         <input v-model="store.cadastroProduto.VALOR_CUSTO"  type="text" id="VALOR_CUSTO" class="form-control" placeholder="VALOR_CUSTO" />
                                     </div>
                                 </div> 
+                                <div class="form-group col-md-2">
+                                    <label class="col-form-label pt-0" for="password">QTDE_ESTOQUE</label>
+                                    <div>
+                                        <input v-model="store.cadastroProduto.QTDE_ESTOQUE"  type="text" id="QTDE_ESTOQUE" class="form-control" placeholder="QTDE_ESTOQUE" />
+                                    </div>
+                                </div> 
                             </div>
                           
                    
@@ -193,7 +199,7 @@
    
 
     //table 2
-    const columns1 = ref(['actions','ID', 'CATEGORIA', 'CODIGO_BARRAS', 'NOME' ,'VALOR','VALOR_CUSTO','SITUACAO']);
+    const columns1 = ref(['actions','ID', 'CATEGORIA', 'CODIGO_BARRAS', 'NOME' ,'VALOR','VALOR_CUSTO','QTDE_ESTOQUE','SITUACAO']);
     const items1 = store.itensCadastro;
     const table_option1 = ref({
         perPage: 10,
@@ -248,7 +254,8 @@
         store.cadastroProduto.NOME = props.NOME, 
         store.cadastroProduto.SITUACAO = props.SITUACAO, 
         store.cadastroProduto.VALOR = props.VALOR,
-        store.cadastroProduto.VALOR_CUSTO = props.VALOR_CUSTO
+        store.cadastroProduto.VALOR_CUSTO = props.VALOR_CUSTO,
+        store.cadastroProduto.QTDE_ESTOQUE = props.QTDE_ESTOQUE
     }
 
 
@@ -266,7 +273,8 @@
                         "NOME": store.cadastroProduto.NOME, 
                         "SITUACAO": store.cadastroProduto.SITUACAO, 
                         "VALOR": store.cadastroProduto.VALOR, 
-                        "VALOR_CUSTO": store.cadastroProduto.VALOR_CUSTO 
+                        "VALOR_CUSTO": store.cadastroProduto.VALOR_CUSTO,
+                        "QTDE_ESTOQUE": store.cadastroProduto.QTDE_ESTOQUE
                     } 
              )
 
@@ -304,7 +312,8 @@ var data = JSON.stringify(
             "NOME": store.cadastroProduto.NOME, 
             "SITUACAO": store.cadastroProduto.SITUACAO, 
             "VALOR": store.cadastroProduto.VALOR, 
-            "VALOR_CUSTO": store.cadastroProduto.VALOR_CUSTO 
+            "VALOR_CUSTO": store.cadastroProduto.VALOR_CUSTO,
+            "QTDE_ESTOQUE": store.cadastroProduto.QTDE_ESTOQUE
             } 
  );
 

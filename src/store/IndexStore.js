@@ -54,7 +54,8 @@ export const indexStore = defineStore("rotas", () =>{
         NOME: 0, 
         SITUACAO: 0,
         VALOR: 0,  
-        VALOR_CUSTO: 0        
+        VALOR_CUSTO: 0, 
+        QTDE_ESTOQUE: 0
         } 
     
         const CaixaProdutos = ref ([])

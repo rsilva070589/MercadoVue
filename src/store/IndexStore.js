@@ -74,9 +74,9 @@ export const indexStore = defineStore("rotas", () =>{
           const vendaCaixa = {
             sequenciaVenda: null,
             formaPgto: null, 
-            valorTotalItens: null,
-            valorTroco: null,
-            descontos: null,
+            valorTotalItens: 0,
+            valorTroco: 0,
+            descontos: 0,
             itensPedido: null,
             valorPago: null,
         }
@@ -93,6 +93,8 @@ export const indexStore = defineStore("rotas", () =>{
         PERC_LUCRO : null
        } ]
     
+       const somaCaixa = 0
+
     return {
         rotas,        
         dadosEmpresa,
@@ -114,7 +116,8 @@ export const indexStore = defineStore("rotas", () =>{
         recursos,
         formataDinheiro,
         vendaCaixa,
-        itensRelVendas
+        itensRelVendas,
+        somaCaixa
     }
 });
 

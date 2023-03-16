@@ -1,5 +1,6 @@
-<template>
-  
+<template> 
+ 
+ {{ store.CaixaProdutos }} 
    
   <div v-for=" (p,index) in store.CaixaProdutos" :key="index"
         style="display: flex; 
@@ -16,9 +17,27 @@
     
   </div> 
  
-
-
-  <input     type="text" 
+<div>
+Qtde: 
+<input    type="text" 
+          ref="myinput"
+          style="width: 25px;"
+          v-focus
+          v-model="store.CaixaProdutos.QTDE" 
+          placeholder="novo produto"
+               
+  />
+  Desconto
+  <input    type="text" 
+          ref="myinput"
+          style="width: 50px;"
+          v-focus
+          v-model="store.CaixaProdutos.DESCONTO" 
+          placeholder="novo produto"
+               
+  />
+ Codigo de Barras
+<input     type="text" 
               ref="myinput"
               v-focus
               :value='store.CaixaProdutos.codProduto' 
@@ -27,25 +46,36 @@
                
   />
 
-  <div class="card" style="background-color: red; color: white; padding: 10px; text-align: center;" 
+
+</div>
+
+  
+
+  <div 
+       style="background-color: red; color: white; 
+              padding: 10px; text-align: center; display: flex;
+              margin: 10px;
+              justify-content: center;
+              " 
       v-if="store.recursos.telaCaixaConfirmar">
  
     <div>
-      Valor do Dinheiro: <input style="text-align: center;" v-model="store.vendaCaixa.valorPago" 
-      
-            type="number" 
-            placeholder="valor Dinheiro">
-    </div>
+      Valor do Dinheiro: <input style="text-align: center;width: 70px; padding: 5px;" v-model="store.vendaCaixa.valorPago"  
+                          type="number" 
+                          placeholder="valor Dinheiro">  
+    </div> 
 
-    <div style="font-size: 40px;" v-if="store.vendaCaixa.valorPago > 0">
+    <div style="font-size: 23px; padding: 5px;" v-if="store.vendaCaixa.valorPago > 0">
       TROCO: {{store.formataDinheiro(store.vendaCaixa.valorPago - somaCaixa(),2) }}
     </div>
 
-    <div>
+    <div style="padding:8px;">
       <button @click="addVenda">VENDER</button>
     </div>
    
+   
   </div>
+  
 
 </template>
 
@@ -55,7 +85,8 @@ import {indexStore} from '../../store/IndexStore'
 import axios from 'axios'
 const store = indexStore(); 
 
-
+store.CaixaProdutos.QTDE = 1
+store.CaixaProdutos.DESCONTO=0
 
 const produtos = [ ]
  
@@ -79,10 +110,15 @@ console.log(item)
     store.CaixaProdutos.push({
                 COD_PRODUTO: codProduto,
                 NOME: item[0]?.NOME,
-                QTDE: 1,
-                VALOR: item[0]?.VALOR,
-                DESCONTO: item[0]?.DESCONTO
+                QTDE: store.CaixaProdutos.QTDE,
+                VALOR: item[0]?.VALOR * store.CaixaProdutos.QTDE,
+                DESCONTO: store.CaixaProdutos.DESCONTO
     })
+   
+    
+    somaCaixa() 
+     store.CaixaProdutos.QTDE=1
+    store.CaixaProdutos.DESCONTO=0
   }
 
     
@@ -91,13 +127,14 @@ console.log(item)
 
 function somaCaixa() {
   var somarProduto = store.CaixaProdutos.map(p =>{
-                return (p.QTDE * p.VALOR)
+                return (p.VALOR - p.DESCONTO)
               } )
 
   let totalProd = 0
   for(let i in somarProduto) {
            totalProd += somarProduto[i] 
           }
+          store.somaCaixa = totalProd
           return totalProd
 }
  
@@ -109,7 +146,7 @@ function somaCaixa() {
 var data = {   
       COD_CLIENTE: 999,
       COD_ENDERECO: 1,    
-      VALOR: somaCaixa(),
+      VALOR: store.somaCaixa,
       TROCO: store.vendaCaixa.valorTroco, 
       DESCONTO: store.vendaCaixa.descontos,
       ITENS: store.CaixaProdutos

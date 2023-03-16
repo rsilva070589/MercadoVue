@@ -10,7 +10,7 @@
 
   ">
  
-        Total: R$ {{store.formataDinheiro(somaCaixa(),2)}}
+        Total: R$ {{store.formataDinheiro(store.somaCaixa,2)}}
         <span style="font-size: 10px; 
                       color: green; 
                       background-color: white;"
@@ -30,18 +30,7 @@
 import {indexStore} from '../../store/IndexStore' 
 const store = indexStore(); 
 
-function somaCaixa () {
-  var somarProduto = store.CaixaProdutos.map(p =>{
-                return (p.QTDE * p.VALOR)
-              } )
-
-  let totalProd = 0
-  for(let i in somarProduto) {
-           totalProd += somarProduto[i] 
-          }
-          return totalProd
-}
-
+ 
 
  
 

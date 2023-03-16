@@ -15,7 +15,7 @@ const routes = [
     {
       path: '/',
       name: 'pdv',
-      component: () => import(/* webpackChunkName: "index2" */ '../components/pdv/Caixa.vue'),
+      component: () => import(/* webpackChunkName: "index2" */ '../views/pdv/Caixa.vue'),
       meta: { layout: 'auth'  }, 
   },
 
@@ -35,7 +35,7 @@ const routes = [
     {
       path: '/pdv',
       name: 'pdv',
-      component: () => import(/* webpackChunkName: "index2" */ '../components/pdv/Caixa.vue'),
+      component: () => import(/* webpackChunkName: "index2" */ '../views/pdv/Caixa.vue'),
       meta: { requiresAuth: true }, 
   },
 

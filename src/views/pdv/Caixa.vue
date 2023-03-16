@@ -29,7 +29,7 @@
     </div>
 
 
-    <div class="container" style="height: 80vh;">        
+    <div class="conteudo" style="height: 80vh; padding: 0px 40px 0px 40px;">        
         <ListagemProdVenda />
     </div>
 
@@ -51,5 +51,12 @@ const store = indexStore();
 </script>
 
 <style>
-
+  .conteudo {
+    
+    flex-direction: row;
+    /* justify-content: center; */
+    align-items: center;
+    width: 100%;
+    overflow-x: auto;
+}
 </style>

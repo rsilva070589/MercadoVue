@@ -31,7 +31,8 @@
                                             <option>Limpeza</option>     
                                             <option>Bebidas</option>  
                                             <option>Diversos</option>   
-                                            <option>Cigarros</option>                                        
+                                            <option>Cigarros</option>       
+                                            <option>Frios</option>                                   
                                         </select>
                                     </div>
                                 </div>

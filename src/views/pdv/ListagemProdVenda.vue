@@ -1,7 +1,5 @@
 <template> 
- 
- {{ store.CaixaProdutos }} 
-   
+  
   <div v-for=" (p,index) in store.CaixaProdutos" :key="index"
         style="display: flex; 
         justify-content: space-between; font-size: 40px;

@@ -215,7 +215,7 @@
             filterPlaceholder: 'Search...',
             limit: 'Results:',
         },
-        sortable: ['ID', 'AMBIENTE', 'TIPO', 'NOMENCLATURA', 'VLR_UNITARIO' ],
+        sortable: ['ID', 'AMBIENTE', 'TIPO', 'NOMENCLATURA', 'VLR_UNITARIO','QTDE_ESTOQUE' ],
         sortIcon: {
             base: 'sort-icon-none',
             up: 'sort-icon-asc',

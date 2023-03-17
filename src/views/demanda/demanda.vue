@@ -145,6 +145,11 @@
            .replace(/(\d)(?=(\d{3})+\,)/g, "$1.");
     }
 
+    var arredonda = function(numero, casasDecimais) {
+    casasDecimais = typeof casasDecimais !== 'undefined' ?  casasDecimais : 0;
+    return +(Math.floor(numero + ('e+' + casasDecimais)) + ('e-' + casasDecimais));
+  };
+
     function demandaFilter() { 
         var arr =  store.itensRelDemanda.filter(f => f.DIAS_RESTANTES < store.diasDemanda  ) 
         console.log(arr)
@@ -158,13 +163,14 @@
             "DEMANDA_DIARIA": x.DEMANDA_DIARIA,
             "QTDE_ESTOQUE": x.QTDE_ESTOQUE,
             "DIAS_RESTANTES": x.DIAS_RESTANTES,
-            "COMPRAR_QTDE": x.DEMANDA_DIARIA+store.diasDemanda 
+            "QTDE_NECESSARIA": arredonda(x.DEMANDA_DIARIA * store.diasDemanda),
+            "COMPRAR_QTDE": arredonda((x.DEMANDA_DIARIA * store.diasDemanda ) - x.QTDE_ESTOQUE)
         }
         arrayFiltro.push(dados)
         })
         
 
-         return arrayFiltro
+         return arrayFiltro.filter(f => f.COMPRAR_QTDE > 0)
       }
    
      
@@ -173,7 +179,7 @@
     
 
     //table 2
-    const columns1 = ref( ['COD_PRODUTO','NOME','DEMANDA_DIARIA','QTDE_ESTOQUE','DIAS_RESTANTES','COMPRAR_QTDE']);
+    const columns1 = ref( ['COD_PRODUTO','NOME','DEMANDA_DIARIA','QTDE_ESTOQUE','DIAS_RESTANTES','QTDE_NECESSARIA','COMPRAR_QTDE']);
     const items1 =  demandaFilter();
     const table_option1 = ref({
         perPage: 10,

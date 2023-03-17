@@ -148,7 +148,23 @@
     function demandaFilter() { 
         var arr =  store.itensRelDemanda.filter(f => f.DIAS_RESTANTES < store.diasDemanda  ) 
         console.log(arr)
-         return arr
+
+        const arrayFiltro = []
+
+        store.itensRelDemanda.map( x => {
+            const dados = {
+            "COD_PRODUTO": x.COD_PRODUTO,
+            "NOME": x.NOME,
+            "DEMANDA_DIARIA": x.DEMANDA_DIARIA,
+            "QTDE_ESTOQUE": x.QTDE_ESTOQUE,
+            "DIAS_RESTANTES": x.DIAS_RESTANTES,
+            "COMPRAR_QTDE": x.DEMANDA_DIARIA+store.diasDemanda 
+        }
+        arrayFiltro.push(dados)
+        })
+        
+
+         return arrayFiltro
       }
    
      
@@ -157,7 +173,7 @@
     
 
     //table 2
-    const columns1 = ref( ['COD_PRODUTO','NOME','DEMANDA_DIARIA','QTDE_ESTOQUE','DIAS_RESTANTES']);
+    const columns1 = ref( ['COD_PRODUTO','NOME','DEMANDA_DIARIA','QTDE_ESTOQUE','DIAS_RESTANTES','COMPRAR_QTDE']);
     const items1 =  demandaFilter();
     const table_option1 = ref({
         perPage: 10,

@@ -95,6 +95,8 @@ export const indexStore = defineStore("rotas", () =>{
     
        const somaCaixa = 0
 
+       const itensRelDemanda = []
+
     return {
         rotas,        
         dadosEmpresa,
@@ -117,7 +119,8 @@ export const indexStore = defineStore("rotas", () =>{
         formataDinheiro,
         vendaCaixa,
         itensRelVendas,
-        somaCaixa
+        somaCaixa,
+        itensRelDemanda
     }
 });
 

@@ -25,6 +25,13 @@ const routes = [
       component: () => import(/* webpackChunkName: "auth-login-boxed" */ '../views/vendasRel/vendasRel.vue'),
       meta: { layout: 'app'  }, 
     },
+
+    {
+      path: '/demanda',
+      name: 'RelDemanda',
+      component: () => import(/* webpackChunkName: "auth-login-boxed" */ '../views/demanda/demanda.vue'),
+      meta: { layout: 'app'  }, 
+    },
     
     {
         path: '/itens',

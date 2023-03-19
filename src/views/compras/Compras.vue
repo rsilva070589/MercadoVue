@@ -1,11 +1,14 @@
 <template>
 
-    <div style="margin-top: -100px;">
-        <h1>Entrada de Notas</h1>
 
+
+    <div style="margin-top: -110px;">
+        <h2>Entrada de Notas</h2>
+
+
+        
         <div class="panel-body">
-                        <div > 
-                        
+                        <div >  
                             <div class="row">
                                 <div class="form-group col-md-2">
                                     <label class="col-form-label pt-0" for="CATEGORIA">Fornecedor</label>
@@ -16,7 +19,9 @@
                                             <option>Dist-Silva</option>     
                                             <option>SIM</option>  
                                             <option>Costa</option>   
-                                            <option>Atacadao</option>                                    
+                                            <option>Atacadao</option>        
+                                            <option>Batista</option>       
+                                            <option>Max-Atacado</option>                           
                                         </select>
                                     </div>
                                 </div>
@@ -29,13 +34,13 @@
                                 <div class="form-group col-md-2">
                                     <label class="col-form-label pt-0" for="NOME">Data da Nota </label>
                                     <div>
-                                        <input v-model="store.compras.DATA_EMISSAO"  type="text" id="DATA_EMISSAO" class="form-control" placeholder="DATA_EMISSAO" />
+                                        <input v-model="store.compras.DATA_EMISSAO"  type="date" id="DATA_EMISSAO" class="form-control" placeholder="DATA_EMISSAO" />
                                     </div>
                                 </div>
                                 <div class="form-group col-md-2">
                                     <label class="col-form-label pt-0" for="NOME">Valor da Nota</label>
                                     <div>
-                                        <input v-model="store.compras.TOTAL_NOTA"  type="text" id="TOTAL_NOTA" class="form-control" placeholder="TOTAL_NOTA" />
+                                        <input v-model="store.compras.TOTAL_NOTA"  type="number" id="TOTAL_NOTA" class="form-control" placeholder="TOTAL_NOTA" />
                                     </div>
                                 </div>
                             </div>
@@ -56,51 +61,50 @@
                                 <div class="form-group col-md-2">
                                     <label class="col-form-label pt-0" for="password">Total do Item</label>
                                     <div>
-                                        <input v-model="store.compraItens.VALOR_CUSTO"  type="text" id="VALOR_CUSTO" class="form-control" placeholder="VALOR_CUSTO" />
+                                        <input v-model="store.compraItens.VALOR_CUSTO"  type="number" id="VALOR_CUSTO" class="form-control" placeholder="VALOR_CUSTO" />
                                     </div>
+                                    
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label class="col-form-label pt-0" for="password">Total do Item Lançados</label>
+                                    <div style="font-size: 30px; text-align: center;">
+                                        {{somarItens()}}
+                                    </div>
+                                    
                                 </div>
                                
-                                
                             </div>
                           
-                   
-
-                        
-
+                    
                             <button @click="incluiItemCompra()" type="" class="btn btn-primary mt-3">Incluir Item</button>
                              
                       
                         </div>
                     </div>
-        
-
-
-
+         
 <div>
  
  </div> 
 
-
-<div class="table-responsive">
+ <div class="conteudo" style="height: 40vh; padding: 0px 40px 0px 40px;">  
+    <div class="table-responsive" style="padding: 10px;">
     <table role="table" aria-busy="false" aria-colcount="5" class="table table-bordered" id="__BVID__415">
         <thead role="rowgroup">
             <tr role="row">
                 <th role="columnheader" scope="col" aria-colindex="1"><div>Codigo</div></th>
                 <th role="columnheader" scope="col" aria-colindex="2"><div>Item Descricao</div></th>
                 <th role="columnheader" scope="col" aria-colindex="3"><div>Qtde</div></th>
-                <th role="columnheader" scope="col" aria-colindex="4" class="text-center"><div>Custo</div></th>
-                <th role="columnheader" scope="col" aria-colindex="5" aria-label="Action" class="text-center"><div></div></th>
+                <th role="columnheader" scope="col" aria-colindex="4" class=""><div>Custo</div></th>
+                <th role="columnheader" scope="col" aria-colindex="5" aria-label="Action" class=""><div></div></th>
             </tr>
         </thead>
         <tbody role="rowgroup">
-            <tr v-for="item in store.compras.ITENS" :key="item.CODIGO_BARRAS" role="row">
+            <tr v-for="(item,index) in store.compras.ITENS" :key="item.CODIGO_BARRAS" role="row">
                 <td aria-colindex="1" role="cell">{{ item.CODIGO_BARRAS }}</td>
                 <td aria-colindex="2" role="cell">{{ item.NOME }}</td>
                 <td aria-colindex="2" role="cell">{{ item.QTDE }}</td>
                 <td aria-colindex="3" role="cell">{{ item.VALOR_CUSTO }}</td>
-                <td aria-colindex="4" role="cell" class="text-center">
-                    <span :class="`text-${item.status_class}`"> {{ item.status }} </span>
-                </td>
+               
                 <td aria-colindex="5" role="cell" class="text-center">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -113,6 +117,7 @@
                         stroke-linecap="round"
                         stroke-linejoin="round"
                         class="feather feather-trash-2 icon"
+                        @click="deleteItem(index)"
                     >
                         <polyline points="3 6 5 6 21 6"></polyline>
                         <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
@@ -123,7 +128,10 @@
             </tr>
         </tbody>
     </table>
+    </div>    
 </div>
+
+
 
  
  
@@ -140,8 +148,18 @@
 <script setup>
   
  import axios from 'axios';
+import index from 'vue3-json-excel';
 import {indexStore} from '../../store/IndexStore'  
  const store = indexStore();   
+
+
+ var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+ "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+function dateFormat(d){
+  var t = new Date(d);
+  return t.getDate()+'/'+monthNames[t.getMonth()]+'/'+t.getFullYear();
+}
 
  
     const bind_data = async  () => {
@@ -170,13 +188,25 @@ import {indexStore} from '../../store/IndexStore'
         "VALOR_CUSTO"  : store.compraItens.VALOR_CUSTO,
     }
   store.compras.ITENS.push(item)
+  somarItens()
+  store.compraItens = {
+        CODIGO_BARRAS: null,
+        QTDE: null,
+        VALOR_CUSTO: null
+       }
 
+ }
+
+ const deleteItem = (index) => {
+    console.log(index)
+    store.compras.ITENS.splice(index, 1);
  }
 
  
 
 
 function enviarDados(){
+    store.compras.DATA_EMISSAO =  dateFormat(store.compras.DATA_EMISSAO)  
     console.log('Cadastrando Novo Item')
     var axios = require('axios');
  
@@ -198,18 +228,49 @@ axios(config)
 .then(function (response) {
   console.log(JSON.stringify(response.data));
   bind_data()
-  store.compras = []
-  store.compraItens = []
+  store.compras = { NOTA: null,
+                    DATA_EMISSAO: null,
+                    FORNECEDOR: null,
+                    TOTAL_NOTA: null,
+                    ITENS: []}
+  store.compraItens = {
+        CODIGO_BARRAS: null,
+        QTDE: null,
+        VALOR_CUSTO: null
+       }
 })
 .catch(function (error) {
   console.log(error);
 });
 
- }
+ } 
  
- 
- 
+ function somarItens() {
+    if (store.compras.ITENS){
+        var somarProduto = store.compras.ITENS.map(p =>{
+                return (p.VALOR_CUSTO)
+              } )
+             
+
+  let totalProd = 0
+  for(let i in somarProduto) {
+           totalProd += somarProduto[i] 
+    }
+    
+          return totalProd
+    }
+
+}
+  
 </script>
 
 <style>
+  .conteudo {
+    
+    flex-direction: row;
+    /* justify-content: center; */
+    align-items: center;
+    width: 100%;
+    overflow-x: auto;
+}
 </style>

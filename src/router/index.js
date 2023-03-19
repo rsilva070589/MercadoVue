@@ -34,6 +34,13 @@ const routes = [
     },
     
     {
+      path: '/compras',
+      name: 'Compras',
+      component: () => import(/* webpackChunkName: "auth-login-boxed" */ '../views/compras/Compras.vue'),
+      meta: { layout: 'app'  }, 
+    },
+
+    {
         path: '/itens',
         name: 'itens',
         component: () => import(/* webpackChunkName: "index2" */ '../views/itens/Itens.vue'),

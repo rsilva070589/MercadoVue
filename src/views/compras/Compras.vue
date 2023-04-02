@@ -4,9 +4,7 @@
 
     <div style="margin-top: -110px;">
         <h2>Entrada de Notas</h2>
-
-
-        
+  
         <div class="panel-body">
                         <div >  
                             <div class="row">
@@ -21,7 +19,9 @@
                                             <option>Costa</option>   
                                             <option>Atacadao</option>        
                                             <option>Batista</option>       
-                                            <option>Max-Atacado</option>                           
+                                            <option>Max-Atacado</option>     
+                                            <option>Acai</option>         
+                                            <option>Barao</option>                
                                         </select>
                                     </div>
                                 </div>

@@ -39,16 +39,16 @@
  
 <div>
 Qtde: 
-<input    type="text" 
+<input    type="number" 
           ref="myinput"
-          style="width: 25px;"
+          style="width: 60px;"
           v-focus
           v-model="store.CaixaProdutos.QTDE" 
           placeholder="novo produto"
                
   />
   Desconto
-  <input    type="text" 
+  <input    type="number" 
           ref="myinput"
           style="width: 50px;"
           v-focus
@@ -111,7 +111,7 @@ store.CaixaProdutos.DESCONTO=0
 const produtos = [ ]
  
 const getProdutos = (async () => { 
-  const result = await axios.get('https://json-replace-oracle-production.up.railway.app/mercadoprodutos') 
+  const result = await axios.get(store.baseApiHTTPS+'/mercadoprodutos') 
     produtos.push(result.data)
   })
  
@@ -181,7 +181,7 @@ console.log(data)
 var config = {
   method: 'post',
 maxBodyLength: Infinity,
-  url: 'https://json-replace-oracle-production.up.railway.app/mercadovendas',
+  url: store.baseApiHTTPS+'/mercadovendas',
   headers: { 
     'Content-Type': 'application/json'
   },

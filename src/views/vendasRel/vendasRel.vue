@@ -12,7 +12,7 @@
                         margin: 15px 0px 15px 0px;
                     ">
 
-                    <div class="card" style="padding: 10px; width: 200px;height: 120px;border-radius: 10px;
+                    <div class="card" style="padding: 10px; width: 250px;height: 120px;border-radius: 10px;
                                     align-items: center; margin: 0px 20px 15px 0px;">
             <span style="font-size: 30px; color: black;">
                 Total Mês
@@ -22,7 +22,7 @@
             </div>
          </div>
 
-         <div class="card" style="padding: 10px;  width: 200px; height: 120px; 
+         <div class="card" style="padding: 10px;  width: 250px; height: 120px; 
                                  border-radius: 10px; align-items: center;
                                  margin: 0px 20px 15px 0px;
                                  background-color: ;
@@ -36,7 +36,7 @@
             
          </div> 
 
-         <div class="card" style="padding: 10px;  width: 200px; height: 120px; 
+         <div class="card" style="padding: 10px;  width: 250px; height: 120px; 
                                  border-radius: 10px; align-items: center;
                                  margin: 0px 20px 15px 0px;
                                  background-color: ;
@@ -50,7 +50,7 @@
             
          </div> 
 
-         <div class="card" style="padding: 10px; width: 200px;height: 
+         <div class="card" style="padding: 10px; width: 250px;height: 
                                 120px;border-radius: 10px; align-items: center;
                                 margin: 0px 20px 15px 0px;
                                 

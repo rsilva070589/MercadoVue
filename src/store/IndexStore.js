@@ -8,9 +8,9 @@ export const indexStore = defineStore("rotas", () =>{
 
     const recursos = []
 
-   const baseApiHTTPS  = 'https://json-replace-oracle-production.up.railway.app'
+   //const baseApiHTTPS  = 'https://json-replace-oracle-production.up.railway.app'
    
-   //const baseApiHTTPS  = 'http://localhost:4040'
+   const baseApiHTTPS  = 'http://192.168.1.108:4040'
 
     const dadosItens = []
 

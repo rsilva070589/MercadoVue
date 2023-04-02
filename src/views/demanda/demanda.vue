@@ -3,8 +3,7 @@
         <h2 class="text-2xl font-medium mx-2" data-testid="statements-title-txt">Demanda Mensal de Produtos</h2>
         <div> 
 </div>
-
-{{  }}
+ 
  
 <Progress v-if="store.recursos.progress" />
 
@@ -18,8 +17,11 @@
                                             <option>3</option>     
                                             <option>5</option>  
                                             <option>7</option>   
+                                            <option>10</option>   
                                             <option>15</option>       
-                                            <option>30</option>     
+                                            <option>20</option>  
+                                            <option>30</option>     ]
+                                            <option>45</option>   
                                             <option>90</option>    
                                             <option>180</option> 
                                             <option>365</option> 
@@ -152,6 +154,7 @@
 
     function demandaFilter() { 
         var arr =  store.itensRelDemanda.filter(f => f.DIAS_RESTANTES < store.diasDemanda  ) 
+        var itemZerado =  store.itensRelDemanda.filter(f => f.QTDE_ESTOQUE == 0  ) 
         console.log(arr)
 
         const arrayFiltro = []
@@ -167,16 +170,15 @@
             "COMPRAR_QTDE": arredonda((x.DEMANDA_DIARIA * store.diasDemanda ) - x.QTDE_ESTOQUE)
         }
         arrayFiltro.push(dados)
-        })
+      
         
+        })
+        console.log(itemZerado)
 
          return arrayFiltro.filter(f => f.COMPRAR_QTDE > 0)
       }
    
-     
-   
-     
-    
+      
 
     //table 2
     const columns1 = ref( ['COD_PRODUTO','NOME','DEMANDA_DIARIA','QTDE_ESTOQUE','DIAS_RESTANTES','QTDE_NECESSARIA','COMPRAR_QTDE']);

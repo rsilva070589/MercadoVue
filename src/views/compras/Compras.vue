@@ -21,7 +21,8 @@
                                             <option>Batista</option>       
                                             <option>Max-Atacado</option>     
                                             <option>Acai</option>         
-                                            <option>Barao</option>                
+                                            <option>Barao</option>         
+                                            <option>Canaa</option>         
                                         </select>
                                     </div>
                                 </div>

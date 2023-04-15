@@ -120,6 +120,7 @@ const getProdutos = (async () => {
  const deleteItem = (index) => {
     console.log(index)
     store.CaixaProdutos.splice(index, 1);
+    somaCaixa() 
  }
  
  

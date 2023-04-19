@@ -1,8 +1,24 @@
 <template>
     <div class="layout-px-spacing" style="margin-top: -100px;">
-        <h1 class="text-2xl font-medium mx-2" data-testid="statements-title-txt">Cadastro dos Itens</h1>
+ 
         <div> 
-</div>
+    </div>
+    <div   v-if="!store.editando" style="display: flex;
+                flex-wrap: wrap; 
+                        margin: 15px 0px 15px 0px;
+                    ">
+
+                    <div class="card" style="padding: 10px; width: 250px;height: 120px;border-radius: 10px;
+                                    align-items: center; margin: 0px 20px 15px 0px;">
+            <span style="font-size: 30px; color: black;">
+                Estoque Atual
+            </span> 
+            <div style="font-size: 30px; color: forestgreen">
+                R$  {{ totalEstoque() }}
+            </div>
+         </div>
+           </div>
+
         
         <div v-if="store.editando">
         
@@ -380,5 +396,39 @@ axios(config)
 
  }
 
+ function totalEstoque1 () {
+    store.itensCadastro
+return 1000
+ }
+
+
+  
+ function totalEstoque() {
+    if (store.itensCadastro){
+        var somarProduto = store.itensCadastro.map(p =>{
+                return (p.VALOR_CUSTO * p.QTDE_ESTOQUE)
+              } )
+             
+
+  let totalProd = 0
+  for(let i in somarProduto) {
+           totalProd += somarProduto[i] 
+    }
+    
+          return formataDinheiro(totalProd,2)
+    }
+
+}
+  
+function formataDinheiro(item) {
+         let venda = item;
+         if (!!venda && venda.toString().includes(",")) {
+           venda = venda.toString().replace(",", ".");
+         }
+         return parseFloat(venda)
+           .toFixed(2)
+           .replace(".", ",")
+           .replace(/(\d)(?=(\d{3})+\,)/g, "$1.");
+    }
 
 </script>

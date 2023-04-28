@@ -6,6 +6,8 @@
  
 <Progress v-if="store.recursos.progress" />
 
+
+
 <div v-if="!store.recursos.progress">
     <div  style="display: flex;
         flex-wrap: wrap; 
@@ -65,8 +67,55 @@
            
          </div>
        
-         
+         <select class="form-control" style="height: 44px; width: 130px;" v-model="store.displayVendasCategoria">
+            <option>Esconder</option>  
+            <option>Diario</option>
+            <option>Mensal</option>                                                     
+        </select>
          </div>
+  
+
+
+    
+
+
+<div v-if="store.displayVendasCategoria == 'Diario'"   style="display: flex;
+        flex-wrap: wrap; 
+                        margin: 15px 0px 15px 0px;
+                    ">
+                  
+    <div v-for="c,index in estoqueCategorias" key="index">
+        <div class="card" style="padding: 5px; width: 180px;height: 100px;border-radius: 10px;
+                                    align-items: center; margin: 0px 20px 15px 0px;">
+            <span style="font-size: 30px; color: black;">
+                {{ c }}
+            </span> 
+            <div style="font-size: 30px; color: forestgreen">
+                  {{ VendasCategoriaDiario(c) }}
+            </div>
+         </div>
+    </div>
+</div>
+
+ 
+<div v-if="store.displayVendasCategoria == 'Mensal'" style="display: flex;
+        flex-wrap: wrap; 
+                        margin: 15px 0px 15px 0px;
+                    ">
+                  
+    <div v-for="c,index in estoqueCategorias" key="index">
+        <div class="card" style="padding: 5px; width: 180px;height: 100px;border-radius: 10px;
+                                    align-items: center; margin: 0px 20px 15px 0px;">
+            <span style="font-size: 30px; color: black;">
+                {{ c }}
+            </span> 
+            <div style="font-size: 30px; color: forestgreen">
+                  {{ VendasCategoriaMes(c) }}
+            </div>
+         </div>
+    </div>
+</div>
+  
         
         <div v-if="!store.editando">
             <div  >
@@ -218,6 +267,30 @@
         }  
         return formataDinheiro(sum)
       }
+
+      function VendasCategoriaDiario(c) {
+console.log(store.itensRelVendas)
+
+        var arr =  store.itensRelVendas.filter(f => f.DATA==dataAtualFormatada(new Date()) && f.CATEGORIA==c) 
+        var sum = 0; 
+        for(var i =0;i<arr.length;i++){ 
+          sum+=arr[i].VALOR; 
+        }  
+        return formataDinheiro(sum)
+         
+      }
+
+      function VendasCategoriaMes(c) {
+console.log(store.itensRelVendas)
+
+        var arr =  store.itensRelVendas.filter(f => f.MES == dataAtualMes(new Date()) && f.CATEGORIA==c) 
+        var sum = 0; 
+        for(var i =0;i<arr.length;i++){ 
+          sum+=arr[i].VALOR; 
+        }  
+        return formataDinheiro(sum)
+         
+      }
    
      
     
@@ -268,7 +341,8 @@
     };
 
  
- 
+    const estoqueCategorias = ['Mercearia','Bebidas','Cigarros','Diversos','Frios','Limpeza']
+    store.displayVendasCategoria = 'Diario'
 
 
 </script>

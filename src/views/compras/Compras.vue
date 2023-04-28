@@ -23,7 +23,8 @@
                                             <option>Acai</option>         
                                             <option>Barao</option>         
                                             <option>Canaa</option>       
-                                            <option>Aviz - Walter Santos</option>   
+                                            <option>Aviz - Walter Santos</option> 
+                                            <option>Santa Marta</option>  
                                         </select>
                                     </div>
                                 </div>

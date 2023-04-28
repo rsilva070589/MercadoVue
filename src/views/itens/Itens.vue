@@ -1,6 +1,11 @@
 <template>
-    <div class="layout-px-spacing" style="margin-top: -100px;">
- 
+
+<div v-if="store.itensDetalhe">
+    <ItensDetalhe />
+</div>
+
+    <div v-if="!store.itensDetalhe" class="layout-px-spacing" style="margin-top: -100px;">
+
         <div> 
     </div>
     <div   v-if="!store.editando" style="display: flex;
@@ -8,18 +13,82 @@
                         margin: 15px 0px 15px 0px;
                     ">
 
-                    <div class="card" style="padding: 10px; width: 250px;height: 120px;border-radius: 10px;
+         <div class="card" style="padding: 10px; width: 250px;height: 120px;border-radius: 10px;
                                     align-items: center; margin: 0px 20px 15px 0px;">
             <span style="font-size: 30px; color: black;">
                 Estoque Atual
             </span> 
             <div style="font-size: 30px; color: forestgreen">
-                R$  {{ totalEstoque() }}
+                  {{ totalEstoque() }}
             </div>
          </div>
-           </div>
+ 
+  </div>
 
-        
+<div  v-if="!store.editando" style="display: flex;" >
+    <div class="card" style="padding: 10px; width: 200px;height: 120px;border-radius: 10px;
+                                    align-items: center; margin: 0px 20px 15px 0px;">
+            <span style="font-size: 30px; color: black;">
+                Mercearia
+            </span> 
+            <div style="font-size: 30px; color: forestgreen">
+                  {{ totalEstoqueMercearia() }}
+            </div>
+         </div>
+
+         <div class="card" style="padding: 10px; width: 200px;height: 120px;border-radius: 10px;
+                                    align-items: center; margin: 0px 20px 15px 0px;">
+            <span style="font-size: 30px; color: black;">
+                Bebidas
+            </span> 
+            <div style="font-size: 30px; color: forestgreen">
+                  {{ totalEstoqueBebidas() }}
+            </div>
+         </div>
+         <div class="card" style="padding: 10px; width: 200px;height: 120px;border-radius: 10px;
+                                    align-items: center; margin: 0px 20px 15px 0px;">
+            <span style="font-size: 30px; color: black;">
+                Cigarros
+            </span> 
+            <div style="font-size: 30px; color: forestgreen">
+                 {{ totalEstoqueCigarros() }}
+            </div>
+         </div>
+
+         <div class="card" style="padding: 10px; width: 200px;height: 120px;border-radius: 10px;
+                                    align-items: center; margin: 0px 20px 15px 0px;">
+            <span style="font-size: 30px; color: black;">
+                Diversos
+            </span> 
+            <div style="font-size: 30px; color: forestgreen">
+                 {{ totalEstoqueDiversos() }}
+            </div>
+         </div>
+
+         <div class="card" style="padding: 10px; width: 200px;height: 120px;border-radius: 10px;
+                                    align-items: center; margin: 0px 20px 15px 0px;">
+            <span style="font-size: 30px; color: black;">
+                Frios
+            </span> 
+            <div style="font-size: 30px; color: forestgreen">
+                 {{ totalEstoqueFrios() }}
+            </div>
+         </div>
+
+         <div class="card" style="padding: 10px; width: 200px;height: 120px;border-radius: 10px;
+                                    align-items: center; margin: 0px 20px 15px 0px;">
+            <span style="font-size: 30px; color: black;">
+                Limpesa
+            </span> 
+            <div style="font-size: 30px; color: forestgreen">
+                  {{ totalEstoqueLimpesa() }}
+            </div>
+         </div>
+
+</div>
+   
+
+ 
         <div v-if="store.editando">
         
             <div class="row layout-top-spacing"
@@ -206,9 +275,10 @@
 
 <script setup>
     import {indexStore} from '../../store/IndexStore' 
-    import { onMounted, ref } from 'vue';
+    import { onMounted, ref, computed } from 'vue';
     import axios from 'axios'
     import { useMeta } from '@/composables/use-meta';
+    import ItensDetalhe from './ItensDetalhe.vue'
     useMeta({ title: 'Multiple Tables' });
     const store = indexStore(); 
     const code_arr = ref([]);
@@ -246,17 +316,20 @@
 
     const bind_data = async  () => {
         store.itensCadastro = []
-       var result = await axios.get(store.baseApiHTTPS+'/mercadoprodutos') 
-      
-    
-        //table 2
-        console.log(result.data)
+       var result = await axios.get(store.baseApiHTTPS+'/mercadoprodutos')  
         store.itensCadastro =  result.data
+        store.itensHistorico = []
 
     }
     //table 2
-    const view_row1 = (item) => {
-        alert('ID: ' + item1.value.ID + ', Name: ' + item1.value.NOMENCLATURA);
+    const view_row1 =  (item1) => {       
+   
+        store.itensDetalhe = true;
+        store.ItensSelecionadoDemanda = item1 ;
+         
+        //table 2
+        console.log(item1)
+        store.itensHistorico =  []
     };
 
     function selectItemEdit (props) {
@@ -419,6 +492,103 @@ return 1000
     }
 
 }
+
+function totalEstoqueMercearia() {
+    if (store.itensCadastro){
+var dados = store.itensCadastro 
+        var somarProduto = store.itensCadastro.filter(f => f.CATEGORIA=='Mercearia').map(p =>{
+                return (p.VALOR_CUSTO * p.QTDE_ESTOQUE)
+              } )                
+
+  let totalProd = 0
+  for(let i in somarProduto) {
+           totalProd += somarProduto[i] 
+    }
+    
+          return formataDinheiro(totalProd,2)
+    }
+}
+
+function totalEstoqueBebidas() {
+    if (store.itensCadastro){
+var dados = store.itensCadastro 
+        var somarProduto = store.itensCadastro.filter(f => f.CATEGORIA=='Bebidas').map(p =>{
+                return (p.VALOR_CUSTO * p.QTDE_ESTOQUE)
+              } )                
+
+  let totalProd = 0
+  for(let i in somarProduto) {
+           totalProd += somarProduto[i] 
+    }
+    
+          return formataDinheiro(totalProd,2)
+    }
+}
+
+function totalEstoqueCigarros() {
+    if (store.itensCadastro){
+var dados = store.itensCadastro 
+        var somarProduto = store.itensCadastro.filter(f => f.CATEGORIA=='Cigarros').map(p =>{
+                return (p.VALOR_CUSTO * p.QTDE_ESTOQUE)
+              } )                
+
+  let totalProd = 0
+  for(let i in somarProduto) {
+           totalProd += somarProduto[i] 
+    }
+    
+          return formataDinheiro(totalProd,2)
+    }
+}
+
+function totalEstoqueDiversos() {
+    if (store.itensCadastro){
+var dados = store.itensCadastro 
+        var somarProduto = store.itensCadastro.filter(f => f.CATEGORIA=='Diversos').map(p =>{
+                return (p.VALOR_CUSTO * p.QTDE_ESTOQUE)
+              } )                
+
+  let totalProd = 0
+  for(let i in somarProduto) {
+           totalProd += somarProduto[i] 
+    }
+    
+          return formataDinheiro(totalProd,2)
+    }
+}
+
+function totalEstoqueFrios() {
+    if (store.itensCadastro){
+var dados = store.itensCadastro 
+        var somarProduto = store.itensCadastro.filter(f => f.CATEGORIA=='Frios').map(p =>{
+                return (p.VALOR_CUSTO * p.QTDE_ESTOQUE)
+              } )                
+
+  let totalProd = 0
+  for(let i in somarProduto) {
+           totalProd += somarProduto[i] 
+    }
+    
+          return formataDinheiro(totalProd,2)
+    }
+}
+
+
+function totalEstoqueLimpesa() {
+    if (store.itensCadastro){
+var dados = store.itensCadastro 
+        var somarProduto = store.itensCadastro.filter(f => f.CATEGORIA=='Limpesa').map(p =>{
+                return (p.VALOR_CUSTO * p.QTDE_ESTOQUE)
+              } )                
+
+  let totalProd = 0
+  for(let i in somarProduto) {
+           totalProd += somarProduto[i] 
+    }
+    
+          return formataDinheiro(totalProd,2)
+    }
+}
   
 function formataDinheiro(item) {
          let venda = item;
@@ -431,4 +601,5 @@ function formataDinheiro(item) {
            .replace(/(\d)(?=(\d{3})+\,)/g, "$1.");
     }
 
+ 
 </script>

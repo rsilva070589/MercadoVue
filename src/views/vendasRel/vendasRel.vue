@@ -296,7 +296,7 @@ console.log(store.itensRelVendas)
     
 
     //table 2
-    const columns1 = ref( ['ID','DATA','COD_PRODUTO','NOME','QTDE','VALOR','CUSTO','LUCRO','PERC_LUCRO' ]);
+    const columns1 = ref( ['ID','DATA','CATEGORIA','COD_PRODUTO','NOME','QTDE','VALOR','CUSTO','LUCRO','PERC_LUCRO' ]);
     const items1 = store.itensRelVendas;
     const table_option1 = ref({
         perPage: 10,
@@ -311,7 +311,7 @@ console.log(store.itensRelVendas)
             filterPlaceholder: 'Search...',
             limit: 'Results:',
         },
-        sortable: ['ID','DATA','COD_PRODUTO','NOME','QTDE','VALOR','CUSTO','LUCRO','PERC_LUCRO' ],
+        sortable: ['ID','DATA','CATEGORIA','COD_PRODUTO','NOME','QTDE','VALOR','CUSTO','LUCRO','PERC_LUCRO' ],
         sortIcon: {
             base: 'sort-icon-none',
             up: 'sort-icon-asc',

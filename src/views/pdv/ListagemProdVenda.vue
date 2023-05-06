@@ -107,6 +107,7 @@ const store = indexStore();
 
 store.CaixaProdutos.QTDE = 1
 store.CaixaProdutos.DESCONTO=0
+store.VendaEnviada = false
 
 const produtos = [ ]
  
@@ -165,7 +166,7 @@ function somaCaixa() {
  
 
  const addVenda = async () => {
-  if (store.CaixaProdutos.length > 0) { 
+  if (store.CaixaProdutos.length > 0 && store.VendaEnviada == false) { 
  
    
 var data = {   
@@ -181,13 +182,15 @@ console.log(data)
 
 var config = {
   method: 'post',
-maxBodyLength: Infinity,
+  maxBodyLength: Infinity,
   url: store.baseApiHTTPS+'/mercadovendas',
   headers: { 
     'Content-Type': 'application/json'
   },
   data : data
 };
+
+store.VendaEnviada=true
 
 axios(config)
 .then(function (response) {

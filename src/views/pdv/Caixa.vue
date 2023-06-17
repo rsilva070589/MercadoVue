@@ -29,7 +29,7 @@
     </div>
 
 
-    <div class="conteudo" style="height: 80vh; padding: 0px 40px 0px 40px;">        
+    <div class="conteudo" style="height: 78.5vh; padding: 0px 00px 0px 40px;">        
         <ListagemProdVenda />
     </div>
 

@@ -10,7 +10,7 @@ export const indexStore = defineStore("rotas", () =>{
 
    //const baseApiHTTPS  = 'https://json-replace-oracle-production.up.railway.app'
    
-   const baseApiHTTPS  = 'http://192.168.1.110:4040'
+   const baseApiHTTPS  = 'http://192.168.1.108:4040'
    
 
    //const baseApiHTTPS  = 'http://35.226.231.200:4040'
@@ -114,6 +114,8 @@ export const indexStore = defineStore("rotas", () =>{
         VALOR_CUSTO: null
        }
 
+       const tipoVenda =  null
+
     return {
         rotas,        
         dadosEmpresa,
@@ -139,7 +141,8 @@ export const indexStore = defineStore("rotas", () =>{
         somaCaixa,
         itensRelDemanda,
         compras,
-        compraItens
+        compraItens,
+        tipoVenda
     }
 });
 

@@ -120,7 +120,7 @@
         <div v-if="!store.editando">
             <div  >
               
-                <div class="panel br-0 p-0 mt-0">
+                <div class="panel br-0 p-0 mt-0" >
                     <div class="custom-table">
                         <v-client-table :data="store.itensRelVendas" :columns="columns1" :options="table_option1">
                         
@@ -296,7 +296,7 @@ console.log(store.itensRelVendas)
     
 
     //table 2
-    const columns1 = ref( ['ID','DATA','CATEGORIA','COD_PRODUTO','NOME','QTDE','VALOR','CUSTO','LUCRO','PERC_LUCRO' ]);
+    const columns1 = ref( ['ID','DATA','CATEGORIA','COD_PRODUTO','NOME','QTDE','VALOR','CUSTO','LUCRO','PERC_LUCRO','FORMA_PGTO' ]);
     const items1 = store.itensRelVendas;
     const table_option1 = ref({
         perPage: 10,
@@ -311,7 +311,7 @@ console.log(store.itensRelVendas)
             filterPlaceholder: 'Search...',
             limit: 'Results:',
         },
-        sortable: ['ID','DATA','CATEGORIA','COD_PRODUTO','NOME','QTDE','VALOR','CUSTO','LUCRO','PERC_LUCRO' ],
+        sortable: ['ID','DATA','CATEGORIA','COD_PRODUTO','NOME','QTDE','VALOR','CUSTO','LUCRO','PERC_LUCRO','FORMA_PGTO' ],
         sortIcon: {
             base: 'sort-icon-none',
             up: 'sort-icon-asc',

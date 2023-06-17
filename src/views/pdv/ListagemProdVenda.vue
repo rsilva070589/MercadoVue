@@ -1,15 +1,30 @@
 <template> 
+
+<div style="display: flex; 
+        justify-content: space-between; font-size: 40px;">
+  <div>
+    <img
+
+                   style="width: 380px; height: 530px; padding-top: 70px; margin-left: -80px;  position: fixed;"  
+                    src="https://cdn-icons-png.flaticon.com/512/8146/8146003.png"
+                    class="lazy" alt="">
+  </div>
+
   
-  <div v-for=" (p,index) in store.CaixaProdutos" :key="index"
-        style="display: flex; 
-        justify-content: space-between; font-size: 40px;
+  <div style="background-color: white; min-height: 530px; min-width: 970px; padding-right: 0px;  ">
+    <div style="display: flex;  
+        justify-content: space-between;        
+        "
   
-        ">
-  <div style="font-size: 40px;">
+        v-for=" (p,index) in store.CaixaProdutos" :key="index"
+        >
+
+
+  <div style="font-size: 50px; ">
     {{p.QTDE}} -  {{p.NOME}}
     </div>
    
-    <div style="font-size: 40px; ">
+    <div style="font-size: 50px;  ">
        R$ {{store.formataDinheiro(p.VALOR,2)  }}
     </div>
 
@@ -37,7 +52,7 @@
     
   </div> 
  
-<div>
+  <div style="font-size: 30px; ">
 Qtde: 
 <input    type="number" 
           ref="myinput"
@@ -60,6 +75,7 @@ Qtde:
 <input     type="text" 
               ref="myinput"
               v-focus
+              style="width: 200px;"
               :value='store.CaixaProdutos.codProduto' 
               @input='evt=>incluirProduto(evt.target.value)'
               placeholder="novo produto"
@@ -68,16 +84,26 @@ Qtde:
 
 
 </div>
-
-  
-
-  <div 
-       style="background-color: red; color: white; 
+    <div 
+       style="background-color: rgb(0, 132, 255); color: rgb(3, 0, 0); 
               padding: 10px; text-align: center; display: flex;
               margin: 10px;
               justify-content: center;
+              font-size: 20px;
               " 
       v-if="store.recursos.telaCaixaConfirmar">
+
+ 
+
+      <div>
+       <select v-model="store.formaPagamento">
+        <option value="DINHEIRO">   Dinheiro        </option>
+        <option VALUE="PIX">        Pix             </option>
+        <option VALUE="CREDITO">    Cartao Credito  </option>
+        <option VALUE="DEBITO">     Cartao Debito   </option>
+       </select>
+      </div>
+
  
     <div>
       Valor do Dinheiro: <input style="text-align: center;width: 70px; padding: 5px;" v-model="store.vendaCaixa.valorPago"  
@@ -95,6 +121,18 @@ Qtde:
    
    
   </div>
+
+  </div>
+
+  
+
+</div>
+ 
+
+
+  
+
+  
   
 
 </template>
@@ -108,6 +146,7 @@ const store = indexStore();
 store.CaixaProdutos.QTDE = 1
 store.CaixaProdutos.DESCONTO=0
 store.VendaEnviada = false
+store.formaPagamento = false
 
 const produtos = [ ]
  
@@ -138,13 +177,14 @@ console.log(item)
                 NOME: item[0]?.NOME,
                 QTDE: store.CaixaProdutos.QTDE,
                 VALOR: item[0]?.VALOR * store.CaixaProdutos.QTDE,
-                DESCONTO: store.CaixaProdutos.DESCONTO
+                DESCONTO: store.CaixaProdutos.DESCONTO                
     })
    
     
     somaCaixa() 
      store.CaixaProdutos.QTDE=1
     store.CaixaProdutos.DESCONTO=0
+   
   }
 
     
@@ -166,7 +206,7 @@ function somaCaixa() {
  
 
  const addVenda = async () => {
-  if (store.CaixaProdutos.length > 0 && store.VendaEnviada == false) { 
+  if (store.CaixaProdutos.length > 0 && store.VendaEnviada == false && store.formaPagamento) { 
  
    
 var data = {   
@@ -175,7 +215,9 @@ var data = {
       VALOR: store.somaCaixa,
       TROCO: store.vendaCaixa.valorTroco, 
       DESCONTO: store.vendaCaixa.descontos,
-      ITENS: store.CaixaProdutos
+      ITENS: store.CaixaProdutos,
+      FORMA_PGTO: store.formaPagamento,
+      TIPO_VENDA: store.tipoVenda
     }
 
 console.log(data)

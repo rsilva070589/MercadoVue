@@ -1,21 +1,41 @@
-<template>
-<div style="background-color: red; height: 50px;">
-  <h1 style="color: white;
-      text-align: center;
-      padding: 5px;
-      font-size: 30px;
-  ">
-        MERCEARIA BRAGATTO - CAIXA
-  </h1>
-</div>
+<template> 
+  
+
+  <div style="background-color: rgb(0, 132, 255); height: 50px;  
+              display: flex; 
+              justify-content: space-between; 
+              padding: 0px 350px 0px 5px;
+              ">
+    <div>
+
+      <span style="color: black; padding: 10%;">Tipo Venda</span>
+      
+       <select v-model="store.tipoVenda">
+        <option value="NORMAL">           Normal            </option>
+        <option VALUE="CONSUMO-INTERNO">  Consumo Interno   </option> 
+       </select>
+ 
+      </div>
+
+      <div >
+          <h1 style="color: rgb(5, 0, 0);               
+          ">
+                MERCEARIA BRAGATTO - CAIXA
+          </h1>
+      </div>
+  </div>
+
 
   
 </template>
 
-<script>
-export default {
+<script setup>
 
-}
+import {indexStore} from '../../store/IndexStore' 
+const store = indexStore(); 
+
+store.tipoVenda = 'NORMAL'
+
 </script>
 
 <style>

@@ -1,8 +1,8 @@
 <template>
-<div style="background-color: red; height: 90px;">
+<div style="background-color: rgb(0, 132, 255); height: 90px;">
 
 
-  <div style="color: white;
+  <div style="color: rgb(19, 5, 5);
       text-align: right;
       padding: 0px 50px 0px 0px;
       font-size: 60px;

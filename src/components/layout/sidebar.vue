@@ -4,7 +4,7 @@
     
     <div class="sidebar-wrapper sidebar-theme" 
          style="margin: -130px 120px -0px -19px ; height: 103%;
-         background-color: black; 
+         background-color: rgb(10, 10, 92); 
          ">
         <nav ref="menu" id="sidebar">
    

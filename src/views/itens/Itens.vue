@@ -116,22 +116,23 @@
                                         </select>
                                     </div>
                                 </div>
+                              
                                 <div class="form-group col-md-2">
-                                    <label class="col-form-label pt-0" for="password">VALOR</label>
-                                    <div>
-                                        <input v-model="store.cadastroProduto.VALOR"  type="text" id="VALOR" class="form-control" placeholder="VALOR" />
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label class="col-form-label pt-0" for="password">VALOR_CUSTO</label>
+                                    <label class="col-form-label pt-0" for="password">CUSTO</label>
                                     <div>
                                         <input v-model="store.cadastroProduto.VALOR_CUSTO"  type="text" id="VALOR_CUSTO" class="form-control" placeholder="VALOR_CUSTO" />
                                     </div>
                                 </div> 
                                 <div class="form-group col-md-2">
+                                    <label class="col-form-label pt-0" for="password">PRECO_VENDA</label>
+                                    <div>
+                                        <input v-model="store.cadastroProduto.VALOR"  type="text" id="VALOR" class="form-control" placeholder="VALOR" />
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-2">
                                     <label class="col-form-label pt-0" for="password">QTDE_ESTOQUE</label>
                                     <div>
-                                        <input v-model="store.cadastroProduto.QTDE_ESTOQUE"  type="text" id="QTDE_ESTOQUE" class="form-control" placeholder="QTDE_ESTOQUE" />
+                                        <input v-model="store.cadastroProduto.QTDE_ESTOQUE"  type="number" id="QTDE_ESTOQUE" class="form-control" placeholder="QTDE_ESTOQUE" />
                                     </div>
                                 </div> 
                             </div>
@@ -273,8 +274,26 @@
 
     const bind_data = async  () => {
         store.itensCadastro = []
-       var result = await axios.get(store.baseApiHTTPS+'/mercadoprodutos')  
-        store.itensCadastro =  result.data
+       var result = await axios.get(store.baseApiHTTPS+'/produtos')  
+       result.data.map(x=> {
+        const itens ={
+            ID: x.id,
+            CATEGORIA: x.categoria,
+            CODIGO_BARRAS: x.codigo_barras,
+            DESCRICAO: x.descricao,
+            FOTO: x.foto,
+            NOME: x.nome,
+            SITUACAO: x.situacao,
+            VALOR: x.valor,
+            VALOR_CUSTO: x.valor_custo,
+            QTDE_ESTOQUE: x.qtde_estoque
+       }
+       store.itensCadastro.push(itens)
+       })
+       
+       console.log(store.itensCadastro)
+
+
         store.itensHistorico = []
 
     }
@@ -328,7 +347,7 @@
     var config = {
         method: 'put',
         maxBodyLength: Infinity,
-        url: store.baseApiHTTPS+'/mercadoprodutos/'+id,
+        url: store.baseApiHTTPS+'/produtos/'+id,
         headers: { 
             'Content-Type': 'application/json'
         },
@@ -367,7 +386,7 @@ var data = JSON.stringify(
 var config = {
   method: 'post',
 maxBodyLength: Infinity,
-  url: store.baseApiHTTPS+'/mercadoprodutos',
+  url: store.baseApiHTTPS+'/produtos',
   headers: { 
     'Content-Type': 'application/json'
   },
@@ -408,7 +427,7 @@ axios(config)
                 var config = {
                 method: 'delete',
                 maxBodyLength: Infinity,
-                url: store.baseApiHTTPS+'/mercadoprodutos',
+                url: store.baseApiHTTPS+'/produtos',
                 headers: { 
                     'Content-Type': 'application/json'
                 },

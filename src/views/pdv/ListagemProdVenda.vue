@@ -151,8 +151,23 @@ store.formaPagamento = false
 const produtos = [ ]
  
 const getProdutos = (async () => { 
-  const result = await axios.get(store.baseApiHTTPS+'/mercadoprodutos') 
-    produtos.push(result.data)
+  const result = await axios.get(store.baseApiHTTPS+'/produtos') 
+  result.data.map(x=> {
+        const itens ={
+            ID: x.id,
+            CATEGORIA: x.categoria,
+            CODIGO_BARRAS: x.codigo_barras,
+            DESCRICAO: x.descricao,
+            FOTO: x.foto,
+            NOME: x.nome,
+            SITUACAO: x.situacao,
+            VALOR: x.valor,
+            VALOR_CUSTO: x.valor_custo,
+            QTDE_ESTOQUE: x.qtde_estoque
+       }
+       produtos.push(itens)
+       })
+        
   })
  
  getProdutos()
@@ -168,7 +183,7 @@ var incluirProduto = (codProduto) => {
  console.log(codProduto)
  
   const ItemSelectCaixa = p => p.CODIGO_BARRAS == codProduto
-  const item  = produtos[0].filter(ItemSelectCaixa)
+  const item  = produtos.filter(ItemSelectCaixa)
   
 console.log(item)
   if (item[0]?.CODIGO_BARRAS == codProduto) { 
@@ -177,7 +192,8 @@ console.log(item)
                 NOME: item[0]?.NOME,
                 QTDE: store.CaixaProdutos.QTDE,
                 VALOR: item[0]?.VALOR * store.CaixaProdutos.QTDE,
-                DESCONTO: store.CaixaProdutos.DESCONTO                
+                DESCONTO: store.CaixaProdutos.DESCONTO,
+                CUSTO:  item[0]?.VALOR_CUSTO * store.CaixaProdutos.QTDE               
     })
    
     
@@ -225,7 +241,7 @@ console.log(data)
 var config = {
   method: 'post',
   maxBodyLength: Infinity,
-  url: store.baseApiHTTPS+'/mercadovendas',
+  url: store.baseApiHTTPS+'/vendas',
   headers: { 
     'Content-Type': 'application/json'
   },

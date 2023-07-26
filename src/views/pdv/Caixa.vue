@@ -1,7 +1,7 @@
 <template>
 <div style="height: 100vh; ">
 
-    <div style="position: fixed; margin-left: 98%;">
+    <div style="position: fixed; margin-left: 99%;">
       <router-link class="button is-light" to="/itens">   
         <svg
                         xmlns="http://www.w3.org/2000/svg"

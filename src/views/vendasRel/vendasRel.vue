@@ -24,7 +24,7 @@
             </div>
          </div>
 
-         <div class="card" style="padding: 10px;  width: 250px; height: 120px; 
+         <div class="card" style="padding: 10px;  width: 270px; height: 120px; 
                                  border-radius: 10px; align-items: center;
                                  margin: 0px 20px 15px 0px;
                                  background-color: ;
@@ -34,6 +34,7 @@
             </span> 
             <div style="font-size: 30px; color: forestgreen">
                 R$ {{ lucroMes()}}
+                <span style="font-size: 15px; color: blue;">{{formataDinheiro(store.lucroMes * 100 / store.vendasMes)}}%</span> 
             </div>
             
          </div> 
@@ -62,7 +63,8 @@
             </span> 
              
             <div style="font-size: 30px; color: forestgreen">
-                R$ {{ lucroHoje()}}
+                R$ {{ lucroHoje()}} 
+                <span style="font-size: 15px; color: blue;">{{formataDinheiro(store.lucroHoje * 100 / store.vendasHoje)}}%</span> 
             </div>
            
          </div>
@@ -196,6 +198,14 @@
 
     store.recursos.progress = true
 
+    var arredonda = function(numero, casasDecimais) {
+   
+    casasDecimais = typeof casasDecimais !== 'undefined' ?  casasDecimais : 0;
+    numero = typeof numero !== 'undefined' ?  numero : 0;
+    return +(Math.floor(numero + ('e+' + casasDecimais)) + ('e-' + casasDecimais));
+    };
+
+
     function dataAtualFormatada(dataFormat){
     var data = dataFormat,
         dia  = data.getDate().toString(),
@@ -238,6 +248,7 @@
         for(var i =0;i<arr.length;i++){ 
           sum+=arr[i].VALOR; 
         }  
+        store.vendasHoje = sum
         return formataDinheiro(sum)
       }
    
@@ -247,8 +258,11 @@
         for(var i =0;i<arr.length;i++){ 
           sum+=arr[i].LUCRO; 
         }  
+        store.lucroHoje = sum
         return formataDinheiro(sum)
       }
+
+       
    
       function totalMes(dtfilter) { 
         var arr =  store.itensRelVendas.filter(f => f.MES == dataAtualMes(new Date())) 
@@ -256,6 +270,7 @@
         for(var i =0;i<arr.length;i++){ 
           sum+=arr[i].VALOR; 
         }  
+        store.vendasMes = sum
         return formataDinheiro(sum)
       }
 
@@ -265,6 +280,7 @@
         for(var i =0;i<arr.length;i++){ 
           sum+=arr[i].LUCRO; 
         }  
+        store.lucroMes = sum
         return formataDinheiro(sum)
       }
 
@@ -288,10 +304,14 @@ console.log(store.itensRelVendas)
         for(var i =0;i<arr.length;i++){ 
           sum+=arr[i].VALOR; 
         }  
-        return formataDinheiro(sum)
-         
+        return formataDinheiro(sum)         
       }
    
+      function percHoje () {
+            let lucro =  lucroHoje()   // vendasHoje()
+            var soma = (lucro * 100)
+            return soma
+      }
      
     
 
@@ -326,12 +346,29 @@ console.log(store.itensRelVendas)
 
     const bind_data = async  () => {
         store.itensRelVendas = []
-       var result = await axios.get(store.baseApiHTTPS+'/mercadovendas') 
+       var result = await axios.get(store.baseApiHTTPS+'/vendas') 
       
     
         //table 2
         console.log(result.data)
-        store.itensRelVendas =  result.data
+         result.data.map(x =>{
+            const dados = { 
+                ID: x.id,
+                DATA: x.data,
+                CATEGORIA: x.categoria,
+                COD_PRODUTO: x.cod_produto,
+                NOME: x.nome,
+                QTDE: x.qtde,
+                NOME: x.nome, 
+                VALOR: x.valor,
+                CUSTO: x.custo,
+                LUCRO: x.lucro,
+                PERC_LUCRO: arredonda(x.perc_lucro,2),
+                FORMA_PGTO: x.forma_pgto,
+                MES: x.mes
+            }
+            store.itensRelVendas.push(dados)
+        })
         store.recursos.progress = false
 
     }

@@ -1,12 +1,13 @@
 {
-    "name": "cork-vue3",
+    "name": "mercearia",
     "version": "0.1.0",
     "private": true,
     "scripts": {
         "dev": "vue-cli-service serve",
         "serve": "vue-cli-service serve",
         "build": "vue-cli-service build",
-        "deploy": "sh deploy.sh"
+        "deploy": "sh deploy.sh",
+        "start": "vue-cli-service serve --port 8181"
     },
     "dependencies": {
         "@fullcalendar/daygrid": "^5.10.1",

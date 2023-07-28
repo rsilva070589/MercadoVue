@@ -161,13 +161,13 @@
 
         store.itensRelDemanda.map( x => {
             const dados = {
-            "COD_PRODUTO": x.COD_PRODUTO,
-            "NOME": x.NOME,
-            "DEMANDA_DIARIA": x.DEMANDA_DIARIA,
-            "QTDE_ESTOQUE": x.QTDE_ESTOQUE,
-            "DIAS_RESTANTES": x.DIAS_RESTANTES,
-            "QTDE_NECESSARIA": arredonda(x.DEMANDA_DIARIA * store.diasDemanda),
-            "COMPRAR_QTDE": arredonda((x.DEMANDA_DIARIA * store.diasDemanda ) - x.QTDE_ESTOQUE)
+            "COD_PRODUTO": x.cod_produto,
+            "NOME": x.nome,
+            "DEMANDA_DIARIA": x.demanda_diaria,
+            "QTDE_ESTOQUE": x.qtde_estoque,
+            "DIAS_RESTANTES": x.dias_restantes,
+            "QTDE_NECESSARIA": arredonda(x.demanda_diaria * store.diasDemanda),
+            "COMPRAR_QTDE": arredonda((x.demanda_diaria * store.diasDemanda ) - x.qtde_estoque)
         }
         arrayFiltro.push(dados)
       
@@ -211,7 +211,7 @@
 
     const bind_data = async  () => {
         store.itensRelDemanda = []
-      var result = await axios.get(store.baseApiHTTPS+'/mercadodemanda') 
+      var result = await axios.get(store.baseApiHTTPS+'/demanda') 
    // var result = await axios.get('http://localhost:4040/mercadodemanda') 
       
     

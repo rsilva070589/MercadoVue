@@ -59,6 +59,11 @@
                                 {{ $t('Itens') }}
                             </router-link>
                         </li>
+                        <li>
+                            <router-link to="/cartao" @click="toggleMobileMenu">
+                                {{ $t('Cartões') }}
+                            </router-link>
+                        </li>
                     </ul>
 
 

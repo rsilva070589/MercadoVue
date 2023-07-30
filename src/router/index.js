@@ -47,6 +47,12 @@ const routes = [
         meta: { requiresAuth: true }, 
     },
     {
+      path: '/cartao',
+      name: 'Cartões',
+      component: () => import(/* webpackChunkName: "index2" */ '../views/cartoes/Cartoes.vue'),
+      meta: { requiresAuth: true }, 
+  },
+    {
       path: '/pdv',
       name: 'pdv',
       component: () => import(/* webpackChunkName: "index2" */ '../views/pdv/Caixa.vue'),

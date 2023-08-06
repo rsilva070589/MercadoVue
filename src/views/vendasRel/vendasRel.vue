@@ -206,7 +206,7 @@
         var arr =  store.itensRelVendas.filter(f => f.DATA==dataAtualFormatada(new Date())) 
         var sum = 0; 
         for(var i =0;i<arr.length;i++){ 
-          sum+=arr[i].VALOR; 
+          sum+=arr[i].VLR; 
         }  
         store.vendasHoje = sum
         return formataDinheiro(sum)
@@ -226,7 +226,7 @@
         var arr =  store.itensRelVendas.filter(f => f.MES == dataAtualMes(new Date())) 
         var sum = 0; 
         for(var i =0;i<arr.length;i++){ 
-          sum+=arr[i].VALOR; 
+          sum+=arr[i].VLR; 
         }  
         store.vendasMes = sum
         return formataDinheiro(sum)
@@ -245,10 +245,10 @@
       function VendasCategoriaDiario(c) {
         console.log(store.itensRelVendas)
 
-        var arr =  store.itensRelVendas.filter(f => f.DATA==dataAtualFormatada(new Date()) && f.CATEGORIA==c) 
+        var arr =  store.itensRelVendas.filter(f => f.DATA==dataAtualFormatada(new Date()) && f.CATGO==c) 
         var sum = 0; 
         for(var i =0;i<arr.length;i++){ 
-          sum+=arr[i].VALOR; 
+          sum+=arr[i].VLR; 
         }  
         return formataDinheiro(sum)
          
@@ -257,10 +257,10 @@
       function VendasCategoriaMes(c) {
         console.log(store.itensRelVendas)
 
-        var arr =  store.itensRelVendas.filter(f => f.MES == dataAtualMes(new Date()) && f.CATEGORIA==c) 
+        var arr =  store.itensRelVendas.filter(f => f.MES == dataAtualMes(new Date()) && f.CATGO==c) 
         var sum = 0; 
         for(var i =0;i<arr.length;i++){ 
-          sum+=arr[i].VALOR; 
+          sum+=arr[i].VLR; 
         }  
         return formataDinheiro(sum)         
       }

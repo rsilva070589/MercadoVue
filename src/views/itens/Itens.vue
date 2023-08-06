@@ -4,6 +4,7 @@
     <ItensDetalhe />
 </div>
 
+
     <div v-if="!store.itensDetalhe" class="layout-px-spacing" style="margin-top: -100px;">
 
         <div> 
@@ -24,7 +25,7 @@
          </div>
  
   </div>
-
+ 
 <div  v-if="!store.editando"   >
  
     <div v-for="c,index in store.itensCategoria" :key="index"  style="display: inline-flex;">
@@ -248,7 +249,7 @@
    
 
     //table 2
-    const columns1 = ref(['actions','ID', 'CATEGORIA', 'CODIGO_BARRAS', 'NOME' ,'VALOR','VALOR_CUSTO','QTDE_ESTOQUE','SITUACAO']);
+    const columns1 = ref(['actions','ID', 'CATEGORIA','ID_CATEGORIA', 'CODIGO_BARRAS', 'NOME' ,'VALOR','VALOR_CUSTO','QTDE_ESTOQUE','SITUACAO']);
     const items1 = store.itensCadastro;
     const table_option1 = ref({
         perPage: 10,
@@ -283,6 +284,7 @@
         const itens ={
             ID: x.id,
             CATEGORIA: x.categoria,
+            ID_CATEGORIA: x.id_categoria,
             CODIGO_BARRAS: x.codigo_barras,
             DESCRICAO: x.descricao,
             FOTO: x.foto,
@@ -327,7 +329,7 @@
         console.log(props)
         
         store.cadastroProduto.ID = props.ID,
-        store.cadastroProduto.CATEGORIA = props.CATEGORIA,
+        store.cadastroProduto.CATEGORIA = props.ID_CATEGORIA,
         store.cadastroProduto.CODIGO_BARRAS = props.CODIGO_BARRAS, 
         store.cadastroProduto.DESCRICAO = props.DESCRICAO, 
         store.cadastroProduto.FOTO = props.FOTO, 
@@ -386,6 +388,7 @@
 var data = JSON.stringify( 
             {  
             "CATEGORIA":   store.cadastroProduto.CATEGORIA     , 
+            "ID_CATEGORIA":   store.cadastroProduto.ID_CATEGORIA     , 
             "CODIGO_BARRAS": store.cadastroProduto.CODIGO_BARRAS, 
             "DESCRICAO":        store.cadastroProduto.DESCRICAO, 
             "FOTO": store.cadastroProduto.FOTO, 
@@ -483,8 +486,7 @@ return 1000
 
 }
 
-  
-const estoqueCategorias = ['Mercearia','Bebidas','Cigarros','Diversos','Frios','Limpeza']
+   
 
 function totalEstoqueCategoria(categoria) {
     if (store.itensCadastro){

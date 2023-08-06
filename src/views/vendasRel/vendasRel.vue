@@ -1,5 +1,5 @@
 <template>
-    <div class="layout-px-spacing" style="margin-top: -100px;">
+    <div class="layout-px-spacing" style="margin-top: -100px; margin-left: -20px;">
         <h2 class="text-2xl font-medium mx-2" data-testid="statements-title-txt">Ticket Médio de Vendas</h2>
         <div> 
 </div>
@@ -74,29 +74,25 @@
             <option>Diario</option>
             <option>Mensal</option>                                                     
         </select>
-         </div>
-  
-
-
-    
-
+         </div> 
 
 <div v-if="store.displayVendasCategoria == 'Diario'"   style="display: flex;
         flex-wrap: wrap; 
                         margin: 15px 0px 15px 0px;
                     ">
                   
-    <div v-for="c,index in estoqueCategorias" key="index">
-        <div class="card" style="padding: 5px; width: 180px;height: 100px;border-radius: 10px;
-                                    align-items: center; margin: 0px 20px 15px 0px;">
-            <span style="font-size: 30px; color: black;">
-                {{ c }}
+   <div v-for="c,index in store.itensCategoria" :key="index"  style="display: inline-flex;">
+        <div class="card" style="padding: 5px; width: 120px;height: 80px;border-radius: 10px;
+                                    align-items: center; margin: 0px 20px 15px 0px; ">
+            <span style="font-size:20px; color: black;">
+                {{ c.DESCRICAO }}
             </span> 
-            <div style="font-size: 30px; color: forestgreen">
-                  {{ VendasCategoriaDiario(c) }}
+            <div style="font-size: 25px; color: forestgreen">
+                  {{ VendasCategoriaDiario(c.DESCRICAO) }}
             </div>
          </div>
     </div>
+    
 </div>
 
  
@@ -105,14 +101,14 @@
                         margin: 15px 0px 15px 0px;
                     ">
                   
-    <div v-for="c,index in estoqueCategorias" key="index">
-        <div class="card" style="padding: 5px; width: 180px;height: 100px;border-radius: 10px;
-                                    align-items: center; margin: 0px 20px 15px 0px;">
-            <span style="font-size: 30px; color: black;">
-                {{ c }}
+            <div v-for="c,index in store.itensCategoria" :key="index"  style="display: inline-flex;">
+            <div class="card" style="padding: 5px; width: 120px;height: 80px;border-radius: 10px;
+                                    align-items: center; margin: 0px 20px 15px 0px; ">
+            <span style="font-size:20px; color: black;">
+                {{ c.DESCRICAO }}
             </span> 
-            <div style="font-size: 30px; color: forestgreen">
-                  {{ VendasCategoriaMes(c) }}
+            <div style="font-size: 25px; color: forestgreen">
+                  {{ VendasCategoriaMes(c.ID) }}
             </div>
          </div>
     </div>
@@ -139,42 +135,7 @@
                                     ></div>
                                 </div>
                             </template>
-                            <template #salary="props"> ${{ props.row.salary }} </template>
-                            <template #actions="props">
-                                <div class="me-2 custom-dropdown dropdown btn-group">
-                                    <a class="btn dropdown-toggle btn-icon-only" href="#" role="button" id="pendingTask" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            style="width: 24px; height: 24px"
-                                            width="24"
-                                            height="24"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-width="2"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            class="feather feather-more-horizontal"
-                                        >
-                                            <circle cx="12" cy="12" r="1"></circle>
-                                            <circle cx="19" cy="12" r="1"></circle>
-                                            <circle cx="5" cy="12" r="1"></circle>
-                                        </svg>
-                                    </a>
-
-                                    <ul class="dropdown-menu dropdown-menu-end">
-                                        <li>
-                                            <a href="javascript:void(0);" class="dropdown-item" @click="view_row1(props.row)"> view </a>
-                                        </li>
-                                        <li @click="selectItemEdit(props.row)">
-                                            <a href="javascript:void(0);" class="dropdown-item"> Edit </a>
-                                        </li>
-                                        <li @click="deleteItem(props.row)">
-                                            <a href="javascript:void(0);" class="dropdown-item"> Delete </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </template>
+                     
                         </v-client-table>
                     </div>
                 </div>
@@ -198,8 +159,7 @@
 
     store.recursos.progress = true
 
-    var arredonda = function(numero, casasDecimais) {
-   
+    var arredonda = function(numero, casasDecimais) {   
     casasDecimais = typeof casasDecimais !== 'undefined' ?  casasDecimais : 0;
     numero = typeof numero !== 'undefined' ?  numero : 0;
     return +(Math.floor(numero + ('e+' + casasDecimais)) + ('e-' + casasDecimais));
@@ -261,9 +221,7 @@
         store.lucroHoje = sum
         return formataDinheiro(sum)
       }
-
-       
-   
+ 
       function totalMes(dtfilter) { 
         var arr =  store.itensRelVendas.filter(f => f.MES == dataAtualMes(new Date())) 
         var sum = 0; 
@@ -285,7 +243,7 @@
       }
 
       function VendasCategoriaDiario(c) {
-console.log(store.itensRelVendas)
+        console.log(store.itensRelVendas)
 
         var arr =  store.itensRelVendas.filter(f => f.DATA==dataAtualFormatada(new Date()) && f.CATEGORIA==c) 
         var sum = 0; 
@@ -297,7 +255,7 @@ console.log(store.itensRelVendas)
       }
 
       function VendasCategoriaMes(c) {
-console.log(store.itensRelVendas)
+        console.log(store.itensRelVendas)
 
         var arr =  store.itensRelVendas.filter(f => f.MES == dataAtualMes(new Date()) && f.CATEGORIA==c) 
         var sum = 0; 
@@ -316,7 +274,7 @@ console.log(store.itensRelVendas)
     
 
     //table 2
-    const columns1 = ref( ['ID','DATA','CATEGORIA','COD_PRODUTO','NOME','QTDE','VALOR','CUSTO','LUCRO','PERC_LUCRO','FORMA_PGTO' ]);
+    const columns1 = ref( ['ID','DATA','CATGO','PRODUTO','NOME','QTDE','VLR','CUSTO','LUCRO','PERC_LUCRO','FORMA_PGTO' ]);
     const items1 = store.itensRelVendas;
     const table_option1 = ref({
         perPage: 10,
@@ -331,7 +289,7 @@ console.log(store.itensRelVendas)
             filterPlaceholder: 'Search...',
             limit: 'Results:',
         },
-        sortable: ['ID','DATA','CATEGORIA','COD_PRODUTO','NOME','QTDE','VALOR','CUSTO','LUCRO','PERC_LUCRO','FORMA_PGTO' ],
+        sortable: ['ID','DATA','CATGO','PRODUTO','NOME','QTDE','VLR','CUSTO','LUCRO','PERC_LUCRO','FORMA_PGTO' ],
         sortIcon: {
             base: 'sort-icon-none',
             up: 'sort-icon-asc',
@@ -347,20 +305,16 @@ console.log(store.itensRelVendas)
     const bind_data = async  () => {
         store.itensRelVendas = []
        var result = await axios.get(store.baseApiHTTPS+'/vendas') 
-      
-    
-        //table 2
-        console.log(result.data)
          result.data.map(x =>{
             const dados = { 
                 ID: x.id,
                 DATA: x.data,
-                CATEGORIA: x.categoria,
-                COD_PRODUTO: x.cod_produto,
+                CATGO: x.categoria,
+                PRODUTO: x.cod_produto,
                 NOME: x.nome,
                 QTDE: x.qtde,
                 NOME: x.nome, 
-                VALOR: x.valor,
+                VLR: x.valor,
                 CUSTO: x.custo,
                 LUCRO: x.lucro,
                 PERC_LUCRO: arredonda(x.perc_lucro,2),
@@ -369,6 +323,16 @@ console.log(store.itensRelVendas)
             }
             store.itensRelVendas.push(dados)
         })
+
+       store.itensCategoria = []
+       var result = await axios.get(store.baseApiHTTPS+'/categoria')  
+       result.data.map(x=> {
+        const itens ={
+            ID: x.id, 
+            DESCRICAO: x.descricao
+       }
+       store.itensCategoria.push(itens)
+       }) 
         store.recursos.progress = false
 
     }
@@ -376,9 +340,7 @@ console.log(store.itensRelVendas)
     const view_row1 = (item) => {
         alert('ID: ' + item1.value.ID + ', Name: ' + item1.value.NOMENCLATURA);
     };
-
  
-    const estoqueCategorias = ['Mercearia','Bebidas','Cigarros','Diversos','Frios','Limpeza']
     store.displayVendasCategoria = 'Diario'
 
 

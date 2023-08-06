@@ -49,7 +49,7 @@ const routes = [
     {
       path: '/cartao',
       name: 'Cartões',
-      component: () => import(/* webpackChunkName: "index2" */ '../views/cartoes/Cartoes.vue'),
+      component: () => import(/* webpackChunkName: "index2" */ '../views/formaPagamento/FormaPagamento.vue'),
       meta: { requiresAuth: true }, 
   },
     {

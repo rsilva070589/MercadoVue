@@ -56,7 +56,7 @@
 Qtde: 
 <input    type="number" 
           ref="myinput"
-          style="width: 60px;"
+          style="width: 80px;"
           v-focus
           v-model="store.CaixaProdutos.QTDE" 
           placeholder="novo produto"
@@ -65,7 +65,7 @@ Qtde:
   Desconto
   <input    type="number" 
           ref="myinput"
-          style="width: 50px;"
+          style="width: 100px;"
           v-focus
           v-model="store.CaixaProdutos.DESCONTO" 
           placeholder="novo produto"
@@ -97,10 +97,10 @@ Qtde:
 
       <div>
        <select v-model="store.formaPagamento">
-        <option value="DINHEIRO">   Dinheiro        </option>
-        <option VALUE="PIX">        Pix             </option>
-        <option VALUE="CREDITO">    Cartao Credito  </option>
-        <option VALUE="DEBITO">     Cartao Debito   </option>
+        <option v-for="pg, indexPg in store.formasPagamentos" :key="indexPg"
+                :value="pg.ID">  
+          {{pg.DESCRICAO}}
+        </option> 
        </select>
       </div>
 
@@ -171,6 +171,24 @@ const getProdutos = (async () => {
   })
  
  getProdutos()
+
+ store.formasPagamentos = [ ]
+
+ const getFormasPagamentos = (async () => { 
+  const result = await axios.get(store.baseApiHTTPS+'/formapagamento') 
+  result.data.map(x=> {
+        const itens ={
+            ID: x.id, 
+            DESCRICAO: x.descricao,
+            TAXA: x.taxa            
+       }
+       store.formasPagamentos.push(itens)
+       })
+        
+  })
+ 
+  getFormasPagamentos()
+
  
  const deleteItem = (index) => {
     console.log(index)

@@ -25,16 +25,16 @@
  
   </div>
 
-<div  v-if="!store.editando" style="display: flex;" >
+<div  v-if="!store.editando"   >
  
-    <div v-for="c,index in store.itensCategoria" :key="index">
-        <div class="card" style="padding: 5px; width: 180px;height: 100px;border-radius: 10px;
-                                    align-items: center; margin: 0px 20px 15px 0px; display: flexbox;">
+    <div v-for="c,index in store.itensCategoria" :key="index"  style="display: inline-flex;">
+        <div class="card" style="padding: 5px; width: 120px;height: 80px;border-radius: 10px;
+                                    align-items: center; margin: 0px 20px 15px 0px; ">
             <span style="font-size:20px; color: black;">
                 {{ c.DESCRICAO }}
             </span> 
-            <div style="font-size: 30px; color: forestgreen">
-                  {{ totalEstoqueCategoria(c) }}
+            <div style="font-size: 25px; color: forestgreen">
+                  {{ totalEstoqueCategoria(c.DESCRICAO) }}
             </div>
          </div>
     </div>

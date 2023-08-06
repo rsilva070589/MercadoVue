@@ -27,11 +27,11 @@
 
 <div  v-if="!store.editando" style="display: flex;" >
  
-    <div v-for="c,index in estoqueCategorias" key="index">
+    <div v-for="c,index in store.itensCategoria" :key="index">
         <div class="card" style="padding: 5px; width: 180px;height: 100px;border-radius: 10px;
-                                    align-items: center; margin: 0px 20px 15px 0px;">
-            <span style="font-size: 30px; color: black;">
-                {{ c }}
+                                    align-items: center; margin: 0px 20px 15px 0px; display: flexbox;">
+            <span style="font-size:20px; color: black;">
+                {{ c.DESCRICAO }}
             </span> 
             <div style="font-size: 30px; color: forestgreen">
                   {{ totalEstoqueCategoria(c) }}
@@ -67,14 +67,18 @@
                                 <div class="form-group col-md-2">
                                     <label class="col-form-label pt-0" for="CATEGORIA">CATEGORIA</label>
                                     <div>
-                                        <select class="form-control" style="height: 44px; width: 130px;" v-model="store.cadastroProduto.CATEGORIA">
-                                            <option disabled value="">Selecione</option>
-                                            <option>Mercearia</option>
-                                            <option>Limpeza</option>     
-                                            <option>Bebidas</option>  
-                                            <option>Diversos</option>   
-                                            <option>Cigarros</option>       
-                                            <option>Frios</option>                                   
+                                        <select class="form-control" style="height: 44px; width: 130px;"
+                                        v-model="store.cadastroProduto.CATEGORIA"                                      
+                                        
+                                        > 
+                                       
+                                            <option v-for="c, indexC in store.itensCategoria" :key="indexC"
+                                            :value="c.ID"
+                                            >
+                                                {{c.DESCRICAO}}
+                                            </option>   
+                                        
+                                                 
                                         </select>
                                     </div>
                                 </div>
@@ -290,8 +294,18 @@
        }
        store.itensCadastro.push(itens)
        })
-       
-       console.log(store.itensCadastro)
+
+       store.itensCategoria = []
+       var result = await axios.get(store.baseApiHTTPS+'/categoria')  
+       result.data.map(x=> {
+        const itens ={
+            ID: x.id, 
+            DESCRICAO: x.descricao
+       }
+       store.itensCategoria.push(itens)
+       })
+       console.log(store.itensCategoria)
+        
 
 
         store.itensHistorico = []

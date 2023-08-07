@@ -108,7 +108,7 @@
                 {{ c.DESCRICAO }}
             </span> 
             <div style="font-size: 25px; color: forestgreen">
-                  {{ VendasCategoriaMes(c.ID) }}
+                  {{ VendasCategoriaMes(c.DESCRICAO) }}
             </div>
          </div>
     </div>
@@ -316,7 +316,7 @@
                 NOME: x.nome, 
                 VLR: x.valor,
                 CUSTO: x.custo,
-                LUCRO: x.lucro,
+                LUCRO: arredonda(x.lucro,2),
                 PERC_LUCRO: arredonda(x.perc_lucro,2),
                 FORMA_PGTO: x.forma_pgto,
                 MES: x.mes

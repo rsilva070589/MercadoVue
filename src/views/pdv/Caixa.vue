@@ -1,5 +1,8 @@
 <template>
+
+
 <div style="height: 100vh; ">
+
 
     <div style="position: fixed; margin-left: 99%;">
       <router-link class="button is-light" to="/itens">   
@@ -22,14 +25,14 @@
                     </svg>
         </router-link> 
     </div>
-   
+ 
 
     <div>
         <NavCaixa /> 
     </div>
 
 
-    <div class="conteudo" style="height: 78.5vh; padding: 0px 00px 0px 40px;">        
+    <div  style="height: 77.5vh; padding: 0px 00px 0px 40px;">        
         <ListagemProdVenda />
     </div>
 

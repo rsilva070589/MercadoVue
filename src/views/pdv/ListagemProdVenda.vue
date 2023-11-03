@@ -1,30 +1,66 @@
 <template> 
-
+ 
+ 
 <div style="display: flex; 
-        justify-content: space-between; font-size: 40px;">
-  <div>
-    <img
+        justify-content: space-between; font-size: 40px; ">
 
-                   style="width: 380px; height: 530px; padding-top: 70px; margin-left: -80px;  position: fixed;"  
-                    src="https://cdn-icons-png.flaticon.com/512/8146/8146003.png"
-                    class="lazy" alt="">
+<div 
+style="   padding: 5px; 
+          margin-left: -25px;
+          max-width: 400px; 
+          font-size: 20px;">
+
+  <input style="max-width: 100%; max-height: 50px;"
+          type="text" v-model="store.produtoSearch" placeholder="Busca Item..."/> 
+  
+  <div
+  class="conteudo"
+  style="  height: 60.5vh; "
+  >
+  <div v-if="store.produtoSearch == ''"> 
+    <img 
+      style="width: 330px; height: 350px;    "  
+      src="https://cdn-icons-png.flaticon.com/512/8146/8146003.png"
+      class="lazy" alt="">
+  </div> 
+
+   <div v-if="store.produtoSearch != ''"   style=" font-size: 17px;  color: black;"    
+    v-for=" (p,index) in store.produtos.filter(f => f.SITUACAO=='ATIVADO').filter(b => b.NOME.toLowerCase().includes(store.produtoSearch.toLocaleLowerCase()))" :key="index"
+    > 
+    
+      <div  style="display: flex; 
+           justify-content: space-between;  " 
+          @click="incluirProduto(p.CODIGO_BARRAS)" 
+          >
+       <div>{{ p.NOME }}</div> 
+       <div>R$  {{ store.formataDinheiro(p.VALOR)}} </div>  
+      </div> 
+   
+    </div>
   </div>
+  
+  
+  
 
+</div> 
   
-  <div style="background-color: white; min-height: 530px; min-width: 970px; padding-right: 0px;  ">
+
+   
+  <div class="conteudo"
+   style="background-color: white;  
+              min-width: 70%; 
+              height: 77.0vh;
+              padding-right: 0px;">
     <div style="display: flex;  
-        justify-content: space-between;        
-        "
-  
+        justify-content: space-between;  
+        "  
         v-for=" (p,index) in store.CaixaProdutos" :key="index"
         >
-
-
-  <div style="font-size: 50px; ">
-    {{p.QTDE}} -  {{p.NOME}}
-    </div>
-   
-    <div style="font-size: 50px;  ">
+ 
+        <div>{{p.QTDE}} </div>
+        <div>{{p.NOME}}</div>
+     
+    <div style="font-size: 40px;  ">
        R$ {{store.formataDinheiro(p.VALOR,2)  }}
     </div>
 
@@ -147,7 +183,8 @@ store.CaixaProdutos.QTDE = 1
 store.CaixaProdutos.DESCONTO=0
 store.VendaEnviada = false
 store.formaPagamento = false
-
+store.produtos = []
+store.produtoSearch = ''
 const produtos = [ ]
  
 const getProdutos = (async () => { 
@@ -166,6 +203,7 @@ const getProdutos = (async () => {
             QTDE_ESTOQUE: x.qtde_estoque
        }
        produtos.push(itens)
+       store.produtos.push(itens)
        })
         
   })
@@ -285,5 +323,12 @@ axios(config)
 </script>
 
 <style>
-
+  .conteudo {
+    
+    flex-direction: row;
+    /* justify-content: center; */
+    align-items: center;
+    width: 100%;
+    overflow-x: auto;
+}
 </style>
